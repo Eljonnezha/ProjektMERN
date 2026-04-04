@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.custom-nav .nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  transition: 0.3s;
+}
+
+/* Hover */
+.custom-nav .nav-link:hover {
+  color: red;
+}
+
+/* Underline efekt */
+.custom-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: red;
+  transition: 0.3s;
+  transform: translateX(-50%);
+}
+
+.custom-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Home section */
+.hero-container {
+  position: relative;
+  width: 100%;
+}
+
+.imgcover {
+  width: 100%;
+  height: 660px;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;          /* vendoset në mes vertikalisht */
+  left: 50%;         /* vendoset në mes horizontalisht */
+  transform: translate(-50%, -50%);
+}
+
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-block;   /* që margin të funksionojë bukur */
+  margin-bottom: 8px;      /* hapësirë poshtë çdo linku */
+}
+
+footer a:hover {
+  color: red;
+  
+}
+
+footer p {
+  margin-bottom: 8px;      /* hapësirë mes paragrafëve */
+}
+
+footer hr {
+  opacity: 0.3;
+  margin: 1.5rem 0;        /* hapësirë më e madhe mes seksioneve */
+}
