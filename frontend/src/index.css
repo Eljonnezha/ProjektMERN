@@ -1,15 +1,15 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .custom-nav .nav-link {
@@ -19,7 +19,7 @@ code {
   transition: 0.3s;
 }
 
-/* Hover */
+/* Hover navbar*/
 .custom-nav .nav-link:hover {
   color: red;
 }
@@ -54,30 +54,41 @@ code {
 
 .hero-text {
   position: absolute;
-  top: 50%;          /* vendoset në mes vertikalisht */
-  left: 50%;         /* vendoset në mes horizontalisht */
+  top: 50%; /* vendoset ne mes vertikalisht */
+  left: 50%; /* vendoset ne mes horizontalisht */
   transform: translate(-50%, -50%);
 }
-
 
 footer a {
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease;
-  display: inline-block;   /* që margin të funksionojë bukur */
-  margin-bottom: 8px;      /* hapësirë poshtë çdo linku */
+  display: inline-block; /* qe margin te funksionoj bukur */
+  margin-bottom: 8px; /* hapesir posht çdo linku */
 }
 
 footer a:hover {
   color: red;
-  
 }
 
 footer p {
-  margin-bottom: 8px;      /* hapësirë mes paragrafëve */
+  margin-bottom: 8px; /* hapesir mes paragrafeve */
 }
 
 footer hr {
   opacity: 0.3;
-  margin: 1.5rem 0;        /* hapësirë më e madhe mes seksioneve */
+  margin: 1.5rem 0; /* hapesir me e madhe mes seksioneve */
+}
+
+/* Contact page */
+.getintouch {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-block; 
+  margin-bottom: 8px;
+}
+
+.getintouch:hover {
+  color: red;
 }

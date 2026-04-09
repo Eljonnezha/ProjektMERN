@@ -6,17 +6,17 @@ const datas = [
   {
     name: "Sarah J.",
     img: Portrait2,
-    text: "The food was absolutely delicious and the service was outstanding. We felt right at home!",
+    text: "Ushqimi ishte shumë i shijshëm dhe shërbimi ishte i shkëlqyer. U ndjemë shumë rehat si në shtëpi!",
   },
   {
     name: "Michael R.",
     img: Portrait3,
-    text: "Fast delivery and the meal arrived hot and fresh. Highly recommend for family dinners!",
+    text: "Dërgesë shumë e shpejtë dhe ushqimi erdhi i ngrohtë dhe i freskët. E rekomandoj shumë për darka familjare!",
   },
   {
     name: "Emily K.",
     img: Portrait,
-    text: "Cozy ambience and friendly staff. Perfect place for a romantic evening.",
+    text: "Ambient i ngrohtë dhe staf shumë miqësor. Vend perfekt për një mbrëmje romantike.",
   },
 ];
 

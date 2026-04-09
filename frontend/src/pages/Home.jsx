@@ -11,19 +11,19 @@ function Home() {
         <Image src={HomeImage} alt="Home" className="imgcover" fluid />
         <div className="hero-text text-center px-3">
           <h1 className="fw-bold text-white fs-md-1 mb-3">
-            Welcome to Our Restaurant
+            Mirësevini në Restorantin Tonë
           </h1>
           <p className="text-white fs-5 fs-md-5">
-            Discover our delicious food while you order it now
+            Zbuloni ushqimin tonë të shijshëm ndërsa e porosisni tani
           </p>
           <Button variant="danger" size="lg" href="/menu">
-            View Menu
+            Shiko Menun
           </Button>
         </div>
       </div>
 
       <Container >
-        <h2 className="text-center my-5">Our Specialities</h2>
+        <h2 className="text-center my-5">Specialitetet Tona</h2>
         <Row className="g-4">
           {meals.slice(10, 13).map((meal, index) => (
             <Col xs={12} sm={6} md={4} key={index}>
@@ -39,7 +39,7 @@ function Home() {
                   <p className="flex-grow-1">{meal.description}</p>
                   <p className="fw-bold">{meal.price} €</p>
                   <Button variant="danger" className="mt-auto" href="/menu">
-                    View Menu
+                    Shiko Menun
                   </Button>
                 </div>
               </div>
@@ -49,13 +49,13 @@ function Home() {
       </Container>
 
       <Container fluid className="my-5 bg-light p-3 p-md-5">
-        <h2 className="text-center py-4 py-md-5">Why Choose Us</h2>
+        <h2 className="text-center py-4 py-md-5">Pse të Na Zgjidhni Ne</h2>
         <Row className="align-items-center">
           {/* Foto në njërën anë */}
           <Col xs={12} md={6} className="d-none d-lg-block ps-lg-5">
             <Image
               src={ChooseUsImg}
-              alt="Restaurant Interior"
+              alt="Interieri i Restorantit"
               className="img-fluid  rounded shadow"
             />
           </Col>
@@ -64,24 +64,24 @@ function Home() {
           <Col xs={12} md={6} className="px-3 px-lg-4">
             <ul className="list-unstyled  mx-auto text-start">
               <li className="mb-3">
-                <h5 className="text-danger fw-bold">Fresh Ingredients</h5>
-                <p>We prepare every dish using the freshest local produce.</p>
+                <h5 className="text-danger fw-bold">Përbërës të Freskët</h5>
+                <p>Ne përgatisim çdo pjatë duke përdorur prodhime lokale të freskëta.</p>
               </li>
               <li className="mb-3">
-                <h5 className="text-danger fw-bold">Friendly Service</h5>
-                <p>Our team welcomes you with warmth and professionalism.</p>
+                <h5 className="text-danger fw-bold">Shërbim Miqësor</h5>
+                <p>Ekipi ynë ju mirëpret me ngrohtësi dhe profesionalizëm.</p>
               </li>
               <li className="mb-3">
-                <h5 className="text-danger fw-bold">Cozy Ambience</h5>
-                <p>Enjoy a relaxing atmosphere perfect for any occasion.</p>
+                <h5 className="text-danger fw-bold">Ambjent i Rehatshëm</h5>
+                <p>Shijoni një atmosferë relaksuese perfekte për çdo rast.</p>
               </li>
               <li className="mb-3">
-                <h5 className="text-danger fw-bold">Fast Delivery</h5>
-                <p>Order online and enjoy your meal hot and fresh at home.</p>
+                <h5 className="text-danger fw-bold">Dërgesë e Shpejtë</h5>
+                <p>Porosit online dhe shijo ushqimin tënd të ngrohtë dhe të freskët në shtëpi.</p>
               </li>
               <li className="mb-3">
-                <h5 className="text-danger fw-bold">Great Value</h5>
-                <p>Delicious meals at fair prices — quality you can trust.</p>
+                <h5 className="text-danger fw-bold">Shërbim i Shkëlqyer</h5>
+                <p>Ushqime të shijshme me çmime të arsyeshme — cilësi që mund të besoni.</p>
               </li>
             </ul>
           </Col>
@@ -89,7 +89,7 @@ function Home() {
       </Container>
 
       <Container className="my-5">
-        <h2 className="text-center mb-4">What Our Customers Say</h2>
+        <h2 className="text-center mb-4">Çfarë Thonë Klientët Tanë</h2>
         <Row className="g-4">
           {datas.map((data, index) => (
             <Col xs={12} md={4} key={index}>
@@ -114,72 +114,6 @@ function Home() {
           ))}
         </Row>
       </Container>
-
-      <footer className="bg-dark text-white py-5">
-        <Container>
-          <Row className="g-4 text-center text-md-start">
-            {/* Contact Us */}
-            <Col xs={12} md={4}>
-              <h5 className="mb-3">Contact Us</h5>
-              <a href="mailto:info@restaurant.com">
-                Email: info@restaurant.com
-              </a>
-              <br />
-              <a href="tel:+11234567890">Phone: (123) 456-7890</a>
-              <br />
-              <a
-                href="https://maps.app.goo.gl/wnnrhMurzLMNH8RS6"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Address: 123 Main Street, Tirane
-              </a>
-            </Col>
-
-            {/* Social Media */}
-            <Col xs={12} md={4}>
-              <h5 className="mb-3">Follow Us</h5>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="bi bi-facebook p-1"></i> Facebook
-              </a>
-              <br />
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="bi bi-instagram p-1"></i> Instagram
-              </a>
-              <br />
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="bi bi-twitter p-1"></i> Twitter
-              </a>
-            </Col>
-
-            {/* Opening Hours */}
-            <Col xs={12} md={4}>
-              <h5 className="mb-3">Opening Hours</h5>
-              <p>Mon - Fri: 9:00 AM - 10:00 PM</p>
-              <p>Sat - Sun: 10:00 AM - 11:00 PM</p>
-            </Col>
-          </Row>
-
-          <hr className="bg-light" />
-
-          {/* Copyright */}
-          <p className="text-center mb-0">
-            &copy; 2026 Restaurant | All rights reserved
-          </p>
-        </Container>
-      </footer>
     </div>
   );
 }
