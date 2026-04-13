@@ -85,10 +85,26 @@ footer hr {
   color: #333;
   text-decoration: none;
   transition: color 0.3s ease;
-  display: inline-block; 
+  display: inline-block;
   margin-bottom: 8px;
 }
 
 .getintouch:hover {
   color: red;
+}
+
+.bgImage {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("image/HomeImage/chooseUSImg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 660px;
+  color: white;
+}
+
+.aboutImg {
+  max-height: 250px;
+  object-fit: cover;
 }

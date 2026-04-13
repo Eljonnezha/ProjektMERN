@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 const cors = require('cors') 
 const session = require('express-session') 
 
+const contactRoute = require("./routes/contactRoute")
+const menuRoute = require("./routes/menuRoute")
+const orderRoute = require("./routes/orderRoute")
 
 app.use(cors( 
 { 
@@ -26,10 +29,10 @@ mongoose.connect('mongodb+srv://eljon:Nezha24@cluster0.6hz38da.mongodb.net/food-
 
 
 // test
-const testFun = (req, res) => {
-    res.send("Hello world")
-}
-app.use("/", testFun)
+app.use(contactRoute)
+app.use(menuRoute)
+app.use(orderRoute)
+app.use("/images", express.static("images"));
 
 
 

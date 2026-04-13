@@ -1,38 +1,105 @@
-import { Col, Container, Row, Form, Button } from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
+import { useState } from "react";
+import axios from "axios";
+
 
 function Contact() {
+
+  const [contactInfo, setContactInfo] = useState({
+    fullName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [valid, setValid] = useState(null);
+
+  const handleChange = (e) => {
+    setContactInfo({ ...contactInfo, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!contactInfo.fullName || !contactInfo.email || !contactInfo.subject || !contactInfo.message) {
+      setValid(false);
+      return; // ndalon funksionin dhe nuk dergon request
+    }
+
+    await axios.post("http://localhost:5000/addContact", contactInfo)
+      .then((res) => {
+        console.log("Send");
+        setValid(true);
+
+        setContactInfo({
+          fullName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      })
+      .catch((err) => {
+        console.log("Error Not Send" + err);
+        setValid(false);
+      });
+  };
   return (
     <Container className="my-5">
       <h1 className="text-center my-4">Contact Us</h1>
-      <hr className="mb-3 w-50 mx-auto border-start border-2 border-secondary shadow" />
 
       <p className="text-center mb-5 text-muted">
         Nese keni ndonje pyetje ose kerkese, mos hezitoni te na kontaktoni duke
         perdorur informacionin e kontaktit me poshte.
       </p>
-      <Row className="g-5">
+
+      <Row className="g-5 my-5 p-4 bg-light rounded shadow">
         <Col xs={12} md={6}>
           <h5 className="mb-3 text-danger">Contact Form</h5>
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
-
-          <Form className="my-5 p-4 bg-light rounded shadow">
-            <Form.Group className="mb-3" controlId="fullname" required>
+          {valid !== null && (
+            <Alert variant={valid ? "success" : "danger"}>
+              {valid ? "Message sent successfully!" : "Message failed to send!"}
+            </Alert>
+          )}
+          <Form onSubmit={handleSubmit} className="my-5 w-100 mx-auto">
+            <Form.Group className="mb-3" controlId="fullname">
               <Form.Label>Full Name</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                name="fullName"
+                value={contactInfo.fullName}
+                onChange={handleChange}
+                required
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="email" required>
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" />
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={contactInfo.email}
+                onChange={handleChange}
+                required
+              />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="subject" required>
+            <Form.Group className="mb-3" controlId="subject">
               <Form.Label>Subject</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                name="subject"
+                value={contactInfo.subject}
+                onChange={handleChange}
+                required
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="message">
               <Form.Label>Message</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={3}
+                rows={4}
+                name="message"
+                value={contactInfo.message}
+                onChange={handleChange}
                 placeholder="Shkruani mesazhin tuaj..."
                 required
               />

@@ -1,6 +1,6 @@
-import Portrait from "../image/portrait.jpg";
-import Portrait2 from "../image/portrait2.jpg";
-import Portrait3 from "../image/portrait3.jpg";
+import Portrait from "../image/costumerImage/portrait.jpg";
+import Portrait2 from "../image/costumerImage/portrait2.jpg";
+import Portrait3 from "../image/costumerImage/portrait3.jpg";
 
 const datas = [
   {

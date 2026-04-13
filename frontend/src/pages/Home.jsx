@@ -1,10 +1,20 @@
-import HomeImage from "../image/homeimg.jpg";
-import ChooseUsImg from "../image/chooseUSImg.jpg";
+import HomeImage from "../image/HomeImage/homeimg.jpg";
+import ChooseUsImg from "../image/HomeImage/chooseUSImg.jpg";
 import { Button, Container, Image, Row, Col } from "react-bootstrap";
-import meals from "../projectInfo/meals.js";
 import datas from "../projectInfo/customers.js";
+import { useState, useEffect} from "react";
+import axios from "axios";
 
 function Home() {
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/get-menu")
+      .then((res) => setMeals(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div id="menu">
       <div className="hero-container">
@@ -22,17 +32,16 @@ function Home() {
         </div>
       </div>
 
-      <Container >
+      <Container>
         <h2 className="text-center my-5">Specialitetet Tona</h2>
         <Row className="g-4">
           {meals.slice(10, 13).map((meal, index) => (
             <Col xs={12} sm={6} md={4} key={index}>
               <div className="card h-100">
                 <Image
-                  src={meal.image}
-                  className="card-img-top img-fluid" 
+                  src={`http://localhost:5000/images/${meal.photo}`}
+                  className="card-img-top img-fluid"
                   alt={meal.name}
-                  
                 />
                 <div className="card-body d-flex flex-column">
                   <h5>{meal.name}</h5>
@@ -65,7 +74,10 @@ function Home() {
             <ul className="list-unstyled  mx-auto text-start">
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Përbërës të Freskët</h5>
-                <p>Ne përgatisim çdo pjatë duke përdorur prodhime lokale të freskëta.</p>
+                <p>
+                  Ne përgatisim çdo pjatë duke përdorur prodhime lokale të
+                  freskëta.
+                </p>
               </li>
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Shërbim Miqësor</h5>
@@ -77,11 +89,17 @@ function Home() {
               </li>
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Dërgesë e Shpejtë</h5>
-                <p>Porosit online dhe shijo ushqimin tënd të ngrohtë dhe të freskët në shtëpi.</p>
+                <p>
+                  Porosit online dhe shijo ushqimin tënd të ngrohtë dhe të
+                  freskët në shtëpi.
+                </p>
               </li>
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Shërbim i Shkëlqyer</h5>
-                <p>Ushqime të shijshme me çmime të arsyeshme — cilësi që mund të besoni.</p>
+                <p>
+                  Ushqime të shijshme me çmime të arsyeshme — cilësi që mund të
+                  besoni.
+                </p>
               </li>
             </ul>
           </Col>
@@ -99,7 +117,7 @@ function Home() {
                     <Image
                       src={data.img}
                       alt={data.name}
-                      className="rounded-circle shadow-sm mb-3"
+                      className="rounded-circle shadow-sm mb-3 "
                       width={100}
                       height={130}
                     />
