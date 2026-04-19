@@ -2,25 +2,32 @@ import { Col, Container, Row } from "react-bootstrap";
 import AdminMenuProps from "./AdminMenuProps";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
+
 
 function AdminMenu() {
+  const nav = useNavigate()
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/get-menu")
-      .then((res) => setMeals(res.data))
-      .catch((err) => console.log(err));
+    const allMeals = async () => {
+      await axios.get("http://localhost:5000/get-menu")
+        .then((res) => setMeals(res.data))
+        .catch((err) => console.log(err));
+    };
+    allMeals();
   }, []);
 
-  const handleDelete = (id) => {
-    axios
-      .delete("http://localhost:5000/delete-menu/" + id)
-      .then((res) => setMeals((prev) => prev.filter((meal) => meal._id !== id)))
+  const handleDelete = async (id) => {
+     await axios.delete("http://localhost:5000/delete-menu/" + id)
+      .then((res) => setMeals(meals.filter((meal) => meal._id !== id)))
       .catch((err) => console.log(err));
   };
+  
 
-
+  const handleUpdate = (id) => {
+    nav("/admin/dashboard/update-item/" + id);
+  }
 
   return (
     <Container>
@@ -32,6 +39,7 @@ function AdminMenu() {
               <AdminMenuProps
                 {...meal}
                 onDelete={() => handleDelete(meal._id)}
+                onUpdate={() => handleUpdate(meal._id)}
               />
             </Col>
           );

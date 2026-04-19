@@ -76,7 +76,7 @@ app.delete("/delete-menu/:id", async (req, res) => {
   }
 });
 
-app.patch("/update-menu/:id", async (req, res) => {
+app.patch("/update-menu/:id", upload.single("photo") , async (req, res) => {
   try {
     const itemId = req.params.id;
     const itemInfo = { ...req.body };

@@ -8,8 +8,9 @@ import Footer from "./components/Footer.jsx";
 import About from "./pages/About.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
 import CartModal from "./pages/CartModal.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CheckoutForm from "./pages/CheckoutForm.jsx";
+import { UserContextProvider } from "./Authentication/UserContext.jsx";  
 
 function App() {
   const location = useLocation();
@@ -61,9 +62,15 @@ function App() {
     setCart([]);
   };
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
-    <>
-       {!location.pathname.startsWith("/admin/dashboard") && <Navigationbar cart={cart} openCart={() => setShowCart(true)} />}
+    <UserContextProvider>
+      {!location.pathname.startsWith("/admin/dashboard") && (
+        <Navigationbar cart={cart} openCart={() => setShowCart(true)} />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu addToCart={addToCart} />} />
@@ -91,10 +98,9 @@ function App() {
         total={cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
         cart={cart}
         clearCart={clearCart}
-
       />
       {!location.pathname.startsWith("/admin/dashboard") && <Footer />}
-    </>
+    </UserContextProvider>
   );
 }
 

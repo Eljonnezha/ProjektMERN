@@ -21,13 +21,13 @@ function Home() {
         <Image src={HomeImage} alt="Home" className="imgcover" fluid />
         <div className="hero-text text-center px-3">
           <h1 className="fw-bold text-white fs-md-1 mb-3">
-            Mirësevini në Restorantin Tonë
+            Mirësevini në EatNow
           </h1>
           <p className="text-white fs-5 fs-md-5">
             Zbuloni ushqimin tonë të shijshëm ndërsa e porosisni tani
           </p>
           <Button variant="danger" size="lg" href="/menu">
-            Shiko Menun
+            View Menu
           </Button>
         </div>
       </div>
@@ -39,7 +39,7 @@ function Home() {
             <Col xs={12} sm={6} md={4} key={index}>
               <div className="card h-100">
                 <Image
-                  src={`http://localhost:5000/images/${meal.photo}`}
+                  src={"http://localhost:5000/images/" + meal.photo}
                   className="card-img-top img-fluid"
                   alt={meal.name}
                 />
@@ -48,7 +48,7 @@ function Home() {
                   <p className="flex-grow-1">{meal.description}</p>
                   <p className="fw-bold">{meal.price} €</p>
                   <Button variant="danger" className="mt-auto" href="/menu">
-                    Shiko Menun
+                    View Menu
                   </Button>
                 </div>
               </div>

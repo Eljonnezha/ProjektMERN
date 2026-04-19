@@ -6,22 +6,26 @@ function Orders() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/getOrders")
-      .then((res) => setOrders(res.data))
-      .catch((err) => console.log("Error getting orders:" + err));
+    const allOrders = async () => {
+      await axios
+        .get("http://localhost:5000/getOrders")
+        .then((res) => setOrders(res.data))
+        .catch((err) => console.log("Error getting orders:" + err));
+    };
+    allOrders();
   }, []);
 
   const handleDelete = async (id) => {
-    await axios.delete('http://localhost:5000/deleteOrder/' + id)
-    .then(() => setOrders(orders.filter(order => order._id !== id)))
-    .catch((err) => console.log("Error deleting order:" + err));
-  }
+    await axios
+      .delete("http://localhost:5000/deleteOrder/" + id)
+      .then(() => setOrders(orders.filter((order) => order._id !== id)))
+      .catch((err) => console.log("Error deleting order:" + err));
+  };
 
   return (
-    <Container className="my-5">
+    <Container className="my-5 ">
       <h2 className="mb-4 text-center">Orders</h2>
-      <Table striped bordered hover responsive>
+      <Table striped bordered hover responsive className="text-center">
         <thead>
           <tr>
             <th>ID</th>
@@ -54,7 +58,12 @@ function Orders() {
                 ))}
               </td>
               <td>
-                <Button variant="danger" onClick={() => handleDelete(order._id)}>Delete</Button>
+                <Button
+                  variant="danger"
+                  onClick={() => handleDelete(order._id)}
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}

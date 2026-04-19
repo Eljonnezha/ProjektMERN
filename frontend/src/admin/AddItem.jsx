@@ -26,16 +26,19 @@ function AddItem() {
     Object.keys(newItem).forEach((key) => {
       formData.append(key, newItem[key]);
     });
-    await axios
-      .post("http://localhost:5000/add-menu", formData)
+    await axios.post("http://localhost:5000/add-menu", formData)
       .then((res) => navigate("/admin/dashboard/admin-menu"))
       .catch((err) => console.log(err));
   };
 
   return (
-    <Container  xs={12} className="my-5" >
+    <Container xs={12} className="my-5">
       <h1 className="text-center mb-4">Create Item</h1>
-      <Form onSubmit={handleSubmit} encType="multipart/form-data" className="w-75 mx-auto">
+      <Form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        className="w-75 mx-auto"
+      >
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control

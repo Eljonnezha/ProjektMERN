@@ -1,0 +1,56 @@
+import { Container, Table} from "react-bootstrap";
+import { useState, useEffect} from "react";
+import axios from "axios";
+
+function Users() {
+
+    const [users, setUsers] = useState([]);
+
+ useEffect(() => {
+    const allUsers = async () => {
+      await axios.get("http://localhost:5000/users", { withCredentials: true})
+        .then((res) => setUsers(res.data))
+        .catch((err) => console.log("Error getting users:" + err));
+    };
+    allUsers();
+  }, []);
+
+  const handleDelete = async (id) => {
+    await axios.delete('http://localhost:5000/user/' + id)
+      .then(() => setUsers(users.filter(user => user._id !== id)))
+      .catch((err) => console.log("Error deleting user:" + err));
+  }
+
+    return ( 
+        <Container className="my-5">
+            <h1 className="mb-4 text-center">Users</h1>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(user => (
+                        <tr key={user._id}>
+                            <td>{user.username}</td>
+                            <td>{user.email}</td>
+                            <td>{user.password}</td>
+                            <td>{user.role}</td>
+                            <td>
+                                <button className="btn btn-danger" onClick={() => handleDelete(user._id)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+
+        </Container>
+    )
+}
+
+export default Users;
+

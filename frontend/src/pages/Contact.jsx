@@ -54,7 +54,7 @@ function Contact() {
 
       <Row className="g-5 my-5 p-4 bg-light rounded shadow">
         <Col xs={12} md={6}>
-          <h5 className="mb-3 text-danger">Contact Form</h5>
+          <h5 className="mb-3 text-danger">Contact</h5>
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
           {valid !== null && (
             <Alert variant={valid ? "success" : "danger"}>
@@ -130,7 +130,7 @@ function Contact() {
               <strong className="pe-2">Phone:</strong> (123) 456-7890
             </a>
             <br />
-            <a href="mailto:info@restaurant.com" className="getintouch">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@restaurant.com" className="getintouch">
               <i className="bi bi-envelope-fill pe-3 fs-5"></i>
               <strong className="pe-2">Email:</strong>
               info@restaurant.com

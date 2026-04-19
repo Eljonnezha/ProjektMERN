@@ -108,3 +108,8 @@ footer hr {
   max-height: 250px;
   object-fit: cover;
 }
+
+.navImg {
+  max-height: 60px;
+  object-fit: cover;
+}

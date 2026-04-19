@@ -1,6 +1,13 @@
-import { Image, Button } from "react-bootstrap";
+import { Image, Button, Col, Row } from "react-bootstrap";
 
-function AdminMenuProps({ photo, name, description, price, onDelete }) {
+function AdminMenuProps({
+  photo,
+  name,
+  description,
+  price,
+  onDelete,
+  onUpdate,
+}) {
   return (
     <div className="card border-0 shadow-sm">
       <Image
@@ -13,9 +20,18 @@ function AdminMenuProps({ photo, name, description, price, onDelete }) {
         <p className="card-text flex-grow-1">{description}</p>
         <p className="card-text fw-bold">{price} €</p>
 
-        <Button variant="danger" className="mt-auto" onClick={onDelete}>
-          Delete <i className="bi bi-trash ms-2"></i>
-        </Button>
+        <Row>
+          <Col md={6}>
+            <Button variant="primary" className="mt-auto" onClick={onUpdate}>
+              Edit <i className="bi bi-pencil ms-2"></i>
+            </Button>
+          </Col>
+          <Col md={6}>
+            <Button variant="danger" className="mt-auto" onClick={onDelete}>
+              Delete <i className="bi bi-trash ms-2"></i>
+            </Button>
+          </Col>
+        </Row>
       </div>
     </div>
   );

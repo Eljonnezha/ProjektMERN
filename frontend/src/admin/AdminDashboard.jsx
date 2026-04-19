@@ -4,6 +4,8 @@ import Messages from "./Messages.jsx";
 import AddItem from "./AddItem.jsx";
 import AdminMenu from "./AdminMenu.jsx";
 import Orders from "./Orders.jsx";
+import UpdateItem from "./UpdateItem.jsx";
+import Users from "./Users.jsx";
 
 function AdminDashboard() {
   return (
@@ -15,6 +17,8 @@ function AdminDashboard() {
         <Route path="messages" element={<Messages />} />
         <Route path="add-item" element={<AddItem />} />
         <Route path="admin-menu" element={<AdminMenu />} />
+        <Route path="update-item/:id" element={<UpdateItem />} />
+        <Route path="users" element={<Users />} />
       </Routes>
     </div>
   );

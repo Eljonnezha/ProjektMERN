@@ -22,8 +22,14 @@ function Sidebar() {
             <Nav.Link as={NavLink} to="/admin/dashboard/add-item">
               Add Item Menu
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/admin/dashboard/update-item/:id">
+              Update Item
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/admin/dashboard/admin-menu">
               Admin Menu
+            </Nav.Link>
+             <Nav.Link as={NavLink} to="/admin/dashboard/users">
+              Users
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

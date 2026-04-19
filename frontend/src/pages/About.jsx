@@ -61,7 +61,7 @@ function About() {
       </Container>
 
       <Container className="my-5">
-        <h2 className="text-center mb-4">Our Staff</h2>
+        <h2 className="text-center mb-4">Stafi Ynë</h2>
         <Row className="g-4">
           <Col xs={12} md={4}>
             <div className="p-4 bg-light rounded shadow h-100 text-center">
@@ -97,8 +97,8 @@ function About() {
                 width={300}
               />
 
-              <h5 className="fw-bold text-danger">Waiters</h5>
-              <p>Stafi i shërbimit</p>
+              <h5 className="fw-bold text-danger">Stafi i Shërbimit</h5>
+              <p>Stafi ynë i shërbimit është gjithmonë i gatshëm për t'ju shërbyer.</p>
             </div>
           </Col>
         </Row>
