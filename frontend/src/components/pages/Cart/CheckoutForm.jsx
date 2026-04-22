@@ -18,7 +18,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
     setOrders({ ...orders, [e.target.name]: e.target.value });
   };
 
-  // CASH ORDER
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,6 +34,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
       return;
     }
 
+    // kontrollojme nese metoda e pageses eshte bere me cash dhe nese po vazhdojme me kete menyre pagese
     if (orders.paymentMethod === "Cash") {
       const orderData = {
         ...orders,
@@ -61,7 +62,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
       }
     }
 
-    // CARD → STRIPE
+    // kontrollojme nese metoda e pageses eshte bere me card dhe nese po vazhdojme me kete menyre pagese
     if (orders.paymentMethod === "Card") {
       try {
         localStorage.setItem("checkoutData", JSON.stringify(orders));
@@ -70,7 +71,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
         const res = await axios.post(
           "http://localhost:5000/api/payment/create-checkout-session",
           { cart }
-        );
+        ); 
 
         window.location.href = res.data.url;
       } catch (err) {

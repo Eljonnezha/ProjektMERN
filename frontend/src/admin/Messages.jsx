@@ -25,7 +25,7 @@ function Messages() {
     return (
         <Container className="my-5">
       <h1 className="text-center my-5">Table Message</h1>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive className="text-center">
         <thead>
           <tr>
             <th>ID</th>

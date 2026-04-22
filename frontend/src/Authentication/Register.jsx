@@ -9,7 +9,7 @@ function Register({ closeModal }) {
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); 
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
@@ -35,7 +35,8 @@ function Register({ closeModal }) {
       setSuccess("Account registered successfully!");
       setTimeout(() => closeModal(), 2000);
     } catch (err) {
-      setError(err.response?.data || "Registration failed");
+      // shfaq mesazhin nese user qe po krijon tashme ekziston ose nje mesazh gabimi qe rregjistrimi deshtoi
+      setError(err.response?.data || "Registration failed"); 
       setSuccess("");
     }
   };

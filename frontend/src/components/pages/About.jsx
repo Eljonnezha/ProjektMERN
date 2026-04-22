@@ -1,7 +1,7 @@
 import { Container, Col, Row, Image } from "react-bootstrap";
-import ChefImg from "../image/AboutImg/Chef.jpg";
-import ManagerImg from "../image/AboutImg/Manager.jpg";
-import WaitersImg from "../image/AboutImg/Waiters.jpg";
+import ChefImg from "../../image/AboutImg/Chef.jpg";
+import ManagerImg from "../../image/AboutImg/Manager.jpg";
+import WaitersImg from "../../image/AboutImg/Waiters.jpg";
 
 function About() {
   return (
@@ -18,7 +18,7 @@ function About() {
         </div>
       </div>
 
-      <Container className="my-5 text-center">
+      <Container className=" text-center  bg-light p-4" fluid>
         <h2 className="mb-3 p-4">Historia</h2>
         <p className="text-muted mx-auto w-75">
           Restoranti ynë u krijua me një vizion të qartë: të sjellim një përvojë
@@ -27,7 +27,7 @@ function About() {
           përbërës të freskët dhe receta inovative.
         </p>
 
-        <p className="text-muted mx-auto w-75">
+        <p className="text-muted mx-auto w-75 pb-5">
           Ambienti i restorantit është projektuar për të krijuar ngrohtësi dhe
           elegancë, duke ofruar një atmosferë perfekte për të shijuar ushqimin
           me familjen dhe miqtë.
@@ -64,11 +64,11 @@ function About() {
         <h2 className="text-center mb-4">Stafi Ynë</h2>
         <Row className="g-4">
           <Col xs={12} md={4}>
-            <div className="p-4 bg-light rounded shadow h-100 text-center">
+            <div className="p-4 h-100 text-center">
               <Image
                 src={ChefImg}
                 className="rounded-circle shadow-sm mb-3 aboutImg"
-                width={300}
+                width={150}
               />
 
               <h5 className="fw-bold text-danger">Chef Marko</h5>
@@ -77,11 +77,11 @@ function About() {
           </Col>
 
           <Col xs={12} md={4}>
-            <div className="p-4 bg-light rounded shadow h-100 text-center">
+            <div className="p-4 h-100  text-center">
               <Image
                 src={ManagerImg}
                 className="rounded-circle shadow-sm mb-3 aboutImg"
-                width={300}
+                width={150}
               />
 
               <h5 className="fw-bold text-danger">Anna Smith</h5>
@@ -90,11 +90,11 @@ function About() {
           </Col>
 
           <Col xs={12} md={4}>
-            <div className="p-4 bg-light rounded shadow h-100 text-center">
+            <div className="p-4 h-100  text-center">
               <Image
                 src={WaitersImg}
                 className="rounded-circle shadow-sm mb-3 aboutImg"
-                width={300}
+                width={150}
               />
 
               <h5 className="fw-bold text-danger">Stafi i Shërbimit</h5>

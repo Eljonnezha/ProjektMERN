@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Navigationbar from "./components/Navigationbar.jsx";
-import Home from "./pages/Home.jsx";
-import Menu from "./pages/Menu.jsx";
-import Contact from "./pages/Contact.jsx";
+import Home from "./components/pages/Home.jsx";
+import Menu from "./components/pages/Menu/Menu.jsx";
+import Contact from "./components/pages/Contact.jsx";
 import Footer from "./components/Footer.jsx";
-import About from "./pages/About.jsx";
+import About from "./components/pages/About.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
-import CartModal from "./pages/CartModal.jsx";
+import CartModal from "./components/pages/Cart/CartModal.jsx";
 import { useState, useEffect } from "react";
-import CheckoutForm from "./pages/CheckoutForm.jsx";
+import CheckoutForm from "./components/pages/Cart/CheckoutForm.jsx";
 import { UserContextProvider } from "./Authentication/UserContext.jsx";  
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
 
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false); 
 
-  // ADD TO CART
+  // shto ne kart 
   const addToCart = (meal) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.name === meal.name);
@@ -35,7 +35,7 @@ function App() {
       return [...prev, { ...meal, quantity: 1 }];
     });
   };
-
+  // rrit sasin ne kart
   const increaseQuantity = (id) => {
     setCart((prev) =>
       prev.map((item) =>
@@ -43,7 +43,7 @@ function App() {
       ),
     );
   };
-
+  // zvogelon sasin ne kart
   const decreaseQuantity = (id) => {
     setCart((prev) =>
       prev
@@ -53,15 +53,15 @@ function App() {
         .filter((item) => item.quantity > 0),
     );
   };
-
+  // heq item nga karta
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.name !== id));
   };
-
+  //pastron karten pas checkout
   const clearCart = () => {
     setCart([]);
   };
-
+  // ruan kart ne localStorage per te mbajtur gjendjen edhe pas rifreskimit te faqes
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -87,8 +87,8 @@ function App() {
         decreaseQuantity={decreaseQuantity}
         removeFromCart={removeFromCart}
         setShowCart={setShowCart}
-        openCheckout={() => {
-          setShowCheckout(true);
+        openCheckout={() => { 
+          setShowCheckout(true); 
           setShowCart(false);
         }}
       />

@@ -1,8 +1,8 @@
-import HomeImage from "../image/HomeImage/homeimg.jpg";
-import ChooseUsImg from "../image/HomeImage/chooseUSImg.jpg";
+import HomeImage from "../../image/HomeImage/homeimg.jpg";
+import ChooseUsImg from "../../image/HomeImage/chooseUSImg.jpg";
 import { Button, Container, Image, Row, Col } from "react-bootstrap";
-import datas from "../projectInfo/customers.js";
-import { useState, useEffect} from "react";
+import datas from "../../projectInfo/customers.js";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Home() {
@@ -24,7 +24,9 @@ function Home() {
             Mirësevini në EatNow
           </h1>
           <p className="text-white fs-5 fs-md-5">
-            Zbuloni ushqimin tonë të shijshëm ndërsa e porosisni tani
+            Zbuloni shijen e veçantë të ushqimit tonë duke porositur tani,
+            thjesht duke u regjistruar dhe loguar në llogarinë tuaj. Shijoni një
+            eksperiencë të shpejtë dhe të këndshme me ne!{" "}
           </p>
           <Button variant="danger" size="lg" href="/menu">
             View Menu
@@ -37,7 +39,7 @@ function Home() {
         <Row className="g-4">
           {meals.slice(10, 13).map((meal, index) => (
             <Col xs={12} sm={6} md={4} key={index}>
-              <div className="card h-100">
+              <div className="card h-100 shadow-sm border-0 bg-light">
                 <Image
                   src={"http://localhost:5000/images/" + meal.photo}
                   className="card-img-top img-fluid"

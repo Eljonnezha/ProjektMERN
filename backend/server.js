@@ -26,6 +26,7 @@ saveUninitialized: true,
 cookie: {maxAge: 1000 * 60 * 60 * 24} 
 })) 
 app.use(express.json({ limit: "1000mb", extended: true })); 
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 
 mongoose.connect(process.env.MONGO_URI) 
@@ -39,7 +40,6 @@ app.use(menuRoute)
 app.use(orderRoute)
 app.use("/api/payment", paymentRoute);
 app.use(userRouter);
-app.use("/images", express.static(path.join(__dirname, "/images")));
 
 
 

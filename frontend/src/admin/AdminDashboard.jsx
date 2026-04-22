@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "./SideBar.jsx";
+import SecondNavbar from "./SecondNavBar.jsx";
 import Messages from "./Messages.jsx";
 import AddItem from "./AddItem.jsx";
 import AdminMenu from "./AdminMenu.jsx";
@@ -10,14 +10,14 @@ import Users from "./Users.jsx";
 function AdminDashboard() {
   return (
     <div>
-      <Sidebar />
+      <SecondNavbar />
 
       <Routes>
-        <Route path="orders" element={<Orders />} />
-        <Route path="messages" element={<Messages />} />
         <Route path="add-item" element={<AddItem />} />
         <Route path="admin-menu" element={<AdminMenu />} />
         <Route path="update-item/:id" element={<UpdateItem />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="messages" element={<Messages />} />
         <Route path="users" element={<Users />} />
       </Routes>
     </div>

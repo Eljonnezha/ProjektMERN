@@ -9,6 +9,7 @@ function CartModal({
   removeFromCart,
   openCheckout,
 }) {
+  // llogarisim totalin e porosise
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   

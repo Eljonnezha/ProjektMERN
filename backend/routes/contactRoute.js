@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const contactModel = require("../models/contactModel");
 
-// Create/ADD => post
+// dergojme te dhenat nga klienti
 app.post("/addContact", async (req, res) => {
   try {
     const { fullName, email, subject, message } = req.body;
@@ -29,6 +29,7 @@ app.post("/addContact", async (req, res) => {
   }
 });
 
+// marrim te gjitha mesazhet nga db
 app.get("/getContacts", async (req, res) => {
   try {
     const allMessages = await contactModel.find();
@@ -38,18 +39,19 @@ app.get("/getContacts", async (req, res) => {
     res.status(500).send("Not read messages: " + err);
     console.log("Not read messages: " + err);
   }
+});
 
-  app.delete("/deleteContact/:id", async (req, res) => {
-    try{
-      const { id} = req.params;
-      await contactModel.findByIdAndDelete(id);
-      res.status(200).send("Message deleted");
-      console.log("Message deleted");
-    }catch(err){
-      res.status(500).send("Not delete message: " + err);
-      console.log("Not delete message: " + err);
-    }
-  })
+// fshijme nje mesazh nga db
+app.delete("/deleteContact/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await contactModel.findByIdAndDelete(id);
+    res.status(200).send("Message deleted");
+    console.log("Message deleted");
+  } catch (err) {
+    res.status(500).send("Not delete message: " + err);
+    console.log("Not delete message: " + err);
+  }
 });
 
 module.exports = app;

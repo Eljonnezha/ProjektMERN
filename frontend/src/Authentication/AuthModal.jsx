@@ -4,35 +4,35 @@ import Login from "./Login";
 import Register from "./Register";
 
 function AuthModal({ show, handleClose }) {
-  const [mode, setMode] = useState("login"); // login | register
+  const [mode, setMode] = useState("login"); // state per te menaxhuar nese jemi ne modalin e login apo register
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       
-      {/* HEADER */}
-      <Modal.Header closeButton className="border-0">
+      {/* header */}
+      <Modal.Header closeButton className="border-0 bg-light">
         <Modal.Title className="w-100 text-center">
           {mode === "login" ? "Login" : "Register"}
         </Modal.Title>
       </Modal.Header>
 
-      {/* BODY */}
-      <Modal.Body className="px-4 py-3">
+      {/* body */}
+      <Modal.Body className="px-4 py-3 bg-light">
 
-        {/* SWITCH CONTENT */}
+        {/* kontenti ku shfaqet login ose register */}
         {mode === "login" ? (
           <Login closeModal={handleClose} />
         ) : (
           <Register closeModal={handleClose} />
         )}
 
-        {/* SWITCH LINK */}
+        {/* butonat ku mund te kalohet nga login ne register dhe anasjelltas */}
         <div className="text-center mt-3 ">
           {mode === "login" ? (
             <span
               onClick={() => setMode("register")}
             >
-              Don’t have an account? <Button className="ms-2" onClick={() => setMode("register")}>Register</Button>
+              Don't have an account? <Button className="ms-2" onClick={() => setMode("register")}>Register</Button>
             </span>
           ) : (
             <span>

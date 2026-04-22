@@ -38,6 +38,7 @@ function Contact() {
           message: "",
         });
       })
+      
       .catch((err) => {
         console.log("Error Not Send" + err);
         setValid(false);
@@ -53,7 +54,7 @@ function Contact() {
       </p>
 
       <Row className="g-5 my-5 p-4 bg-light rounded shadow">
-        <Col xs={12} md={6}>
+        <Col xs={12} md={6} lg={5}>
           <h5 className="mb-3 text-danger">Contact</h5>
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
           {valid !== null && (
@@ -110,7 +111,7 @@ function Contact() {
             </Button>
           </Form>
         </Col>
-        <Col xs={12} md={6} className="ps-5">
+        <Col xs={12} md={6} lg={5} className="ps-5">
           <h5 className="mb-3 text-danger">Get In Touch</h5>
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
           <div className="my-5 d-flex flex-column">

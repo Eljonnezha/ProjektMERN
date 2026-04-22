@@ -4,10 +4,10 @@ const Stripe = require("stripe");
 
 require("dotenv").config();
 
-const stripe = new Stripe(process.env.SNIPE_SECRET);
+const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 app.post("/create-checkout-session", async (req, res) => {
-  const { cart, customer } = req.body; // ✔ KËTU
+  const { cart, customer } = req.body; 
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -29,7 +29,7 @@ app.post("/create-checkout-session", async (req, res) => {
       cancel_url: "http://localhost:3000/menu?payment=cancel",
     });
 
-    res.json({ url: session.url, customer }); // ✔ opsional
+    res.json({ url: session.url, customer });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });

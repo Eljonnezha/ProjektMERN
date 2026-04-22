@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const orderModel = require("../models/orderModel");
 
-// ADD ORDER
+// shtojme porosit nga klienti
 app.post("/addOrder", async (req, res) => {
   try {
     const {
@@ -54,7 +54,7 @@ app.post("/addOrder", async (req, res) => {
   }
 });
 
-// GET ORDERS
+// marrim porosit nga klienti
 app.get("/getOrders", async (req, res) => {
   try {
     const allOrders = await orderModel.find();
@@ -66,6 +66,7 @@ app.get("/getOrders", async (req, res) => {
   }
 });
 
+// fshijme nje porosi nga klienti
 app.delete("/deleteOrder/:id", async (req, res) => {
     try{
         const orderId = req.params.id;

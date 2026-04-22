@@ -21,12 +21,12 @@ function AdminMenuProps({
         <p className="card-text fw-bold">{price} €</p>
 
         <Row>
-          <Col md={6}>
+          <Col md={6} xs={12} className="mb-2 mb-md-0">
             <Button variant="primary" className="mt-auto" onClick={onUpdate}>
               Edit <i className="bi bi-pencil ms-2"></i>
             </Button>
           </Col>
-          <Col md={6}>
+          <Col md={6} xs={12} className="mt-2 mt-md-0">
             <Button variant="danger" className="mt-auto" onClick={onDelete}>
               Delete <i className="bi bi-trash ms-2"></i>
             </Button>

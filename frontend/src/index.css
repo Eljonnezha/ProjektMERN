@@ -11,7 +11,7 @@ code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
+/* navbar */
 .custom-nav .nav-link {
   position: relative;
   font-weight: 500;
@@ -36,7 +36,7 @@ code {
   transition: 0.3s;
   transform: translateX(-50%);
 }
-
+/* Hover efekt per underline */
 .custom-nav .nav-link:hover::after {
   width: 100%;
 }
@@ -58,7 +58,7 @@ code {
   left: 50%; /* vendoset ne mes horizontalisht */
   transform: translate(-50%, -50%);
 }
-
+/* Footer */
 footer a {
   color: #fff;
   text-decoration: none;
@@ -93,6 +93,7 @@ footer hr {
   color: red;
 }
 
+/* About page */
 .bgImage {
   background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -104,12 +105,15 @@ footer hr {
   color: white;
 }
 
+
 .aboutImg {
-  max-height: 250px;
+  max-height: 150px;
   object-fit: cover;
 }
 
+/* Navbar image */
 .navImg {
   max-height: 60px;
   object-fit: cover;
 }
+

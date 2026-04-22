@@ -57,7 +57,7 @@ function Footer() {
         <hr className="bg-light" />
 
         <p className="text-center mb-0">
-          &copy; 2026 Restaurant | All rights reserved
+          &copy; 2026 EatNow | All rights reserved
         </p>
       </Container>
     </footer>

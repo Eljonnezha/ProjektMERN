@@ -1,9 +1,11 @@
 import { Image, Button, Alert } from "react-bootstrap";
 import { useContext, useState } from "react";
-import { UserContext } from "../Authentication/UserContext.jsx";
+import { UserContext } from "../../../Authentication/UserContext.jsx";
 
 function MenuProps({ photo, name, description, price, addToCart }) {
+  // marrim info nese useri nese eshte i loguar ose jo nga UserContext
   const { userInfo } = useContext(UserContext);
+  // shfaqim alert nese useri nuk eshte i loguar dhe tenton te shtoje ne cart pa u loguar
   const [showAlert, setShowAlert] = useState(false);
 
   return (
@@ -20,6 +22,7 @@ function MenuProps({ photo, name, description, price, addToCart }) {
         <Button
           variant="danger"
           className="mt-auto mb-2"
+          // kontrollojme nese useri eshte i loguar, nese jo shfaqim alert dhe item nuk shtohen ne cart, nese po item shtohen ne cart
           onClick={() => {
             if (!userInfo.email) {
               setShowAlert(true);

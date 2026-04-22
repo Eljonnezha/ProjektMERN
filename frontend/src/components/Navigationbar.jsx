@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthModal from "../Authentication/AuthModal.jsx";
 
 function Navigationbar({ cart, openCart }) {
+  // llogarisim totalin e sasis se itemeve ne cart
   const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const nav = useNavigate();
@@ -17,12 +18,10 @@ function Navigationbar({ cart, openCart }) {
     const userData = async () => {
       if (!userInfo.email) {
         await axios
-          .get("http://localhost:5000/user/", {
-            withCredentials: true,
-          })
+          .get("http://localhost:5000/user/", { withCredentials: true })
           .then((res) => setUserInfo(res.data))
           .catch((err) => {
-            console.log("No data " + err);
+            console.log("No login");
           });
       }
     };
@@ -40,6 +39,7 @@ function Navigationbar({ cart, openCart }) {
       .catch((err) => console.log("Not logout"));
   };
 
+  // shfaqim modalin per login dhe register kur useri klikon butonin register/login
   const [showAuth, setShowAuth] = useState(false);
 
   return (
@@ -72,7 +72,7 @@ function Navigationbar({ cart, openCart }) {
                 AdminDashboard
               </Nav.Link>
             </Nav>
-
+            {/* nese useri eshte i loguar shfaqet butoni i cart nese jo shfaqet butoni per login dhe register */}
             {userInfo.email && (
               <Button
                 variant="danger"
@@ -82,19 +82,19 @@ function Navigationbar({ cart, openCart }) {
                 View Cart ({totalQuantity}) <i className="bi bi-cart ms-2"></i>
               </Button>
             )}
-
+            {/* nese useri nuk eshte i loguar shfaqet butoni per login dhe register */}
             {!userInfo.email && (
               <Button
                 variant="primary"
-                className="me-2 px-4 rounded-pill"
+                className="rounded-pill px-4 me-5"
                 onClick={() => setShowAuth(true)}
               >
                 Register / Login
               </Button>
             )}
-
+            {/* nese useri eshte i loguar shfaqet icona e userit dhe informacioni i userit dhe butoni per logout */}
             {userInfo.email ? (
-              <div className="mx-3 d-flex align-items-center gap-3 ">
+              <div className="my-3 d-flex align-items-center gap-3  ">
                 <Nav.Link href="/user/">
                   <i className="bi bi-person-circle ms-2 fs-4 me-2"></i>
                   {userInfo.username}

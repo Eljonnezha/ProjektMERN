@@ -13,8 +13,10 @@ function Menu({ addToCart }) {
       .catch((err) => console.log(err));
   }, []);
 
+  // nese pagesa ishte e sukseshme shfaqim modalin e suksesit 
   const [showSuccessModal, setShowSuccessModal] = useState(false); 
 
+  // Do kontrollojm nese pagesa ka qen e suksesshme dhe ruan porosin ne databaz
   useEffect(() => {
     const params = new URLSearchParams(window.location.search); 
     const payment = params.get("payment");
@@ -63,7 +65,7 @@ function Menu({ addToCart }) {
 
       <Modal
         show={showSuccessModal}
-        onHide={() => setShowSuccessModal(false)} // mbyll modalin kur perdoruesi klikon "OK"
+        onHide={() => setShowSuccessModal(false)} 
         centered
       >
         <Modal.Body className="text-center my-4 ">

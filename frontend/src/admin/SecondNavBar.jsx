@@ -1,34 +1,33 @@
 import { Nav, Container, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
 
-function Sidebar() {
+function SecondNavBar() {
   return (
     <Navbar expand="lg" className="bg-white shadow-sm sticky-top py-3">
       <Container>
         <Navbar.Brand href="/admin/dashboard/add-item" className="fw-bold fs-4 text-danger">
-          Admin Dashbord
+          Admin Dashboard
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto gap-4 custom-nav mb-3">
-            <Nav.Link as={NavLink} to="/admin/dashboard/orders">
-              Orders
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/dashboard/messages">
-              Messages
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/dashboard/add-item">
+            <Nav.Link href="/admin/dashboard/add-item">
               Add Item Menu
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/dashboard/update-item/:id">
+            <Nav.Link href="/admin/dashboard/update-item/:id">
               Update Item
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin/dashboard/admin-menu">
+            <Nav.Link href="/admin/dashboard/admin-menu">
               Admin Menu
             </Nav.Link>
-             <Nav.Link as={NavLink} to="/admin/dashboard/users">
+             <Nav.Link href="/admin/dashboard/orders">
+              Orders
+            </Nav.Link>
+            <Nav.Link href="/admin/dashboard/messages">
+              Messages
+            </Nav.Link>
+             <Nav.Link href="/admin/dashboard/users">
               Users
             </Nav.Link>
           </Nav>
@@ -38,4 +37,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SecondNavBar;

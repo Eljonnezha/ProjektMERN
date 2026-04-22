@@ -11,7 +11,7 @@ function Login({ closeModal }) {
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const [valid, setValid] = useState("");
 
   const handleChange = (e) => {
     setUserLog({
@@ -23,7 +23,7 @@ function Login({ closeModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
+    try { 
       await axios.post("http://localhost:5000/login/", userLog, {
         withCredentials: true,
       });
@@ -34,15 +34,16 @@ function Login({ closeModal }) {
 
       setUserInfo(res.data);
 
-      setError("");
+      setValid(""); // pastron çdo mesazh gabimi nese kishte me pare
       closeModal();
+      
     } catch (err) {
-      setError("Invalid email or password");
+      setValid("Invalid email or password");
     }
   };
   return (
     <Form onSubmit={handleSubmit} className="px-3">
-      {error && <Alert variant="danger">{error}</Alert>}
+      {valid && <Alert variant="danger">{valid}</Alert>}
       <Form.Control
         name="email"
         placeholder="Email"
