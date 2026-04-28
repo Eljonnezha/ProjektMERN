@@ -43,6 +43,7 @@ app.post("/addOrder", async (req, res) => {
       totalAmount,
       items,
       orderDate: Date.now(),
+      status: "processing",
     });
 
     await newOrder.save();
@@ -59,7 +60,7 @@ app.get("/getOrders", async (req, res) => {
   try {
     const allOrders = await orderModel.find();
     res.status(200).send(allOrders);
-    console.log("All orders retrieved");
+    console.log(allOrders);
   } catch (err) {
     res.status(500).send("Error getting orders:" + err);
     console.log("Error getting orders:" + err);
@@ -68,15 +69,38 @@ app.get("/getOrders", async (req, res) => {
 
 // fshijme nje porosi nga klienti
 app.delete("/deleteOrder/:id", async (req, res) => {
-    try{
-        const orderId = req.params.id;
-        await orderModel.findByIdAndDelete(orderId);
-        res.status(200).send("Order deleted");
-        console.log("Order deleted");
-    }catch(err){
-        res.status(500).send("Error deleting order:" + err);
-        console.log("Error deleting order:" + err);
+  try {
+    const orderId = req.params.id;
+    await orderModel.findByIdAndDelete(orderId);
+    res.status(200).send("Order deleted");
+    console.log("Order deleted");
+  } catch (err) {
+    res.status(500).send("Error deleting order:" + err);
+    console.log("Error deleting order:" + err);
+  }
+});
+
+// ndryshojme statusin e porosise
+app.put("/updateOrderStatus/:id", async (req, res) => {
+  try {
+    const orderId = req.params.id;
+
+    const updatedOrder = await orderModel.findByIdAndUpdate(
+      orderId,
+      { status: "delivered" },
+      { new: true },
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).send("Order not found");
     }
-})
+
+    res.status(200).send(updatedOrder);
+    console.log("Order status updated");
+  } catch (err) {
+    res.status(500).send("Error updating order status: " + err);
+    console.log("Error updating order status: " + err);
+  }
+});
 
 module.exports = app;

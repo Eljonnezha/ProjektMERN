@@ -22,7 +22,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
+    if ( 
       !orders.fullName ||
       !orders.email ||
       !orders.address ||
@@ -31,6 +31,9 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
       !orders.paymentMethod
     ) {
       setValid(false);
+      setTimeout(() => {
+        setValid(null);
+      }, 3000);
       return;
     }
 
@@ -58,7 +61,10 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
         }, 1500);
       } catch (err) {
         console.log(err);
-        setValid(false);
+        setValid(false); 
+        setTimeout(() => {
+          setValid(null);
+        }, 3000);
       }
     }
 
@@ -86,19 +92,19 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton className="d-flex flex-column align-items-start gap-2 bg-danger text-white">
         <Modal.Title>Checkout</Modal.Title>
-        <p>Total: {total} €</p>
+        <p>Totali: {total} €</p>
       </Modal.Header>
 
       <Modal.Body className="bg-light d-flex flex-column gap-3">
         <Form>
           {valid !== null && (
             <Alert variant={valid ? "success" : "danger"}>
-              {valid ? "Order success!" : "Fill all fields!"}
+              {valid ? "Porosia u krye me sukses!" : "Plotëso të gjitha fushat!"}
             </Alert>
           )}
 
           <Form.Group className="mb-2 mt-2">
-            <Form.Label>Full Name</Form.Label>
+            <Form.Label>Emri i Plotë</Form.Label>
             <Form.Control name="fullName" onChange={handleChange} />
           </Form.Group>
 
@@ -108,25 +114,25 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
           </Form.Group>
 
           <Form.Group className="mb-2">
-            <Form.Label>Address</Form.Label>
+            <Form.Label>Adresa</Form.Label>
             <Form.Control name="address" onChange={handleChange} />
           </Form.Group>
 
           <Row className="mb-2">
             <Col>
-              <Form.Label>Phone Number</Form.Label>
+              <Form.Label>Numri i Telefonit</Form.Label>
               <Form.Control name="phoneNumber" onChange={handleChange} />
             </Col>
             <Col>
-              <Form.Label>City</Form.Label>
+              <Form.Label>Qyteti</Form.Label>
               <Form.Control name="city" onChange={handleChange} />
             </Col>
           </Row>
 
           <Form.Group className="mb-5">
-            <Form.Label>Payment Method</Form.Label>
+            <Form.Label>Metoda e Pagesës</Form.Label>
             <Form.Select name="paymentMethod" onChange={handleChange}>
-              <option value="">Select</option>
+              <option value="">Zgjidh</option>
               <option value="Cash">Cash</option>
               <option value="Card">Card</option>
             </Form.Select>

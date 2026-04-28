@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Navigationbar from "./components/Navigationbar.jsx";
 import Home from "./components/pages/Home.jsx";
@@ -8,18 +8,39 @@ import Footer from "./components/Footer.jsx";
 import About from "./components/pages/About.jsx";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
 import CartModal from "./components/pages/Cart/CartModal.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CheckoutForm from "./components/pages/Cart/CheckoutForm.jsx";
-import { UserContextProvider } from "./Authentication/UserContext.jsx";  
+import {
+  UserContextProvider,
+  UserContext,
+} from "./Authentication/UserContext.jsx";
+
+// Pjesa e mbrojtjes se Admin
+function AdminProtectedRoute() {
+  const { userInfo, authChecked } = useContext(UserContext);
+
+  if (!authChecked) {
+    return null;
+  }
+
+  if (userInfo?.role !== "admin") {
+    return <Navigate to="/" replace />;
+  }
+
+  return <AdminDashboard />;
+}
 
 function App() {
   const location = useLocation();
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
   const [showCart, setShowCart] = useState(false);
-  const [showCheckout, setShowCheckout] = useState(false); 
+  const [showCheckout, setShowCheckout] = useState(false);
 
-  // shto ne kart 
+  // shto ne kart
   const addToCart = (meal) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.name === meal.name);
@@ -76,7 +97,8 @@ function App() {
         <Route path="/menu" element={<Menu addToCart={addToCart} />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
+        {/* Permiresimi i route */}
+        <Route path="/admin/dashboard/*" element={<AdminProtectedRoute />} />
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
       <CartModal
@@ -87,8 +109,8 @@ function App() {
         decreaseQuantity={decreaseQuantity}
         removeFromCart={removeFromCart}
         setShowCart={setShowCart}
-        openCheckout={() => { 
-          setShowCheckout(true); 
+        openCheckout={() => {
+          setShowCheckout(true);
           setShowCart(false);
         }}
       />

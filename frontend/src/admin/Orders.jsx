@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Table, Button } from "react-bootstrap";
+import { Container, Table, Button, Col, Row } from "react-bootstrap";
 import axios from "axios";
 
 function Orders() {
@@ -18,8 +18,17 @@ function Orders() {
   const handleDelete = async (id) => {
     await axios
       .delete("http://localhost:5000/deleteOrder/" + id)
-      .then(() => setOrders(orders.filter((order) => order._id !== id)))
+      .then((res) => setOrders(orders.filter((order) => order._id !== id)))
       .catch((err) => console.log("Error deleting order:" + err));
+  };
+
+  const updateStatus = async (id) => {
+    await axios
+      .put("http://localhost:5000/updateOrderStatus/" + id)
+      .then((res) =>
+        setOrders(orders.map((order) => (order._id === id ? res.data : order))),
+      )
+      .catch((err) => console.log("Error updating order status:" + err));
   };
 
   return (
@@ -37,6 +46,9 @@ function Orders() {
             <th>Total Amount</th>
             <th>Payment Method</th>
             <th>Items</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -51,19 +63,35 @@ function Orders() {
               <td>{order.totalAmount} €</td>
               <td>{order.paymentMethod}</td>
               <td>
-                {order.items.map((item, i) => (
-                  <div key={i}>
-                    {item.name} x {item.quantity}
-                  </div>
-                ))}
+                <ul>
+                  {order.items.map((item, i) => (
+                    <li key={i}>
+                      {item.name} x {item.quantity} 
+                    </li>
+                  ))}
+                </ul>
               </td>
+              <td>{new Date(order.orderDate).toLocaleString()}</td>
+              <td>{order.status}</td>
               <td>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDelete(order._id)}
-                >
-                  Delete
-                </Button>
+                <Row className="d-flex flex-column g-2">
+                  <Col>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(order._id)}
+                    >
+                      Delete
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      variant="success"
+                      onClick={() => updateStatus(order._id)}
+                    >
+                      Complete
+                    </Button>
+                  </Col>
+                </Row>
               </td>
             </tr>
           ))}

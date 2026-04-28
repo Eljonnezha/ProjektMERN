@@ -1,5 +1,5 @@
 import { Image, Button, Alert } from "react-bootstrap";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../Authentication/UserContext.jsx";
 
 function MenuProps({ photo, name, description, price, addToCart }) {
@@ -8,6 +8,16 @@ function MenuProps({ photo, name, description, price, addToCart }) {
   // shfaqim alert nese useri nuk eshte i loguar dhe tenton te shtoje ne cart pa u loguar
   const [showAlert, setShowAlert] = useState(false);
 
+  // fshehim alert pas 4 sek nese eshte shfaqur
+ useEffect(() => {
+  if (showAlert) {
+    const timer = setTimeout(() => {
+      setShowAlert(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }
+}, [showAlert]);
   return (
     <div className="card border-0 shadow-sm">
       <Image
@@ -31,11 +41,11 @@ function MenuProps({ photo, name, description, price, addToCart }) {
             addToCart({ name, price });
           }}
         >
-          Add to Cart <i className="bi bi-cart ms-2"></i>
+          Shto në <i className="bi bi-cart ms-2"></i>
         </Button>
         {showAlert && (
           <Alert variant="warning" onClose={() => setShowAlert(false)} dismissible>
-            Please login to add items to cart.
+            Ju lutem logohuni për të shtuar artikuj në cart.
           </Alert>
         )}
       </div>

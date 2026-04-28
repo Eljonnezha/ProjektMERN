@@ -34,7 +34,7 @@ app.get("/getContacts", async (req, res) => {
   try {
     const allMessages = await contactModel.find();
     res.status(200).send(allMessages);
-    console.log("allMessages");
+    console.log(allMessages);
   } catch (err) {
     res.status(500).send("Not read messages: " + err);
     console.log("Not read messages: " + err);

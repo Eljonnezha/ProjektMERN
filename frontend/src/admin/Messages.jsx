@@ -33,6 +33,7 @@ function Messages() {
             <th>Email</th>
             <th>Subject</th>
             <th>Message</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>

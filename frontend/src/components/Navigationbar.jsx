@@ -64,13 +64,13 @@ function Navigationbar({ cart, openCart }) {
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/contact">Contact Us</Nav.Link>
 
-              <Nav.Link
-                href="/admin/dashboard/add-item"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                AdminDashboard
+              {userInfo.role === "admin" && (
+                <Nav.Link
+                  href="/admin/dashboard/add-item"
+                >
+                  AdminDashboard
               </Nav.Link>
+              )}
             </Nav>
             {/* nese useri eshte i loguar shfaqet butoni i cart nese jo shfaqet butoni per login dhe register */}
             {userInfo.email && (
@@ -79,7 +79,7 @@ function Navigationbar({ cart, openCart }) {
                 className="px-4 rounded-pill me-5"
                 onClick={openCart}
               >
-                View Cart ({totalQuantity}) <i className="bi bi-cart ms-2"></i>
+                <i className="bi bi-cart ms-2"></i> ({totalQuantity}) 
               </Button>
             )}
             {/* nese useri nuk eshte i loguar shfaqet butoni per login dhe register */}

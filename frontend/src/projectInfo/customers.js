@@ -6,17 +6,17 @@ const datas = [
   {
     name: "Sarah J.",
     img: Portrait2,
-    text: "Ushqimi ishte shumë i shijshëm dhe shërbimi ishte i shkëlqyer. U ndjemë shumë rehat si në shtëpi!",
+    text: "Porosia ishte shumë e thjeshtë për t'u bërë dhe ushqimi erdhi i freskët. Platforma është super praktike!",
   },
   {
     name: "Michael R.",
     img: Portrait3,
-    text: "Dërgesë shumë e shpejtë dhe ushqimi erdhi i ngrohtë dhe i freskët. E rekomandoj shumë për darka familjare!",
+    text: "Dërgesë shumë e shpejtë dhe ushqimi mbërriti i ngrohtë. Shumë i përshtatshëm për darka familjare!",
   },
   {
     name: "Emily K.",
     img: Portrait,
-    text: "Ambient i ngrohtë dhe staf shumë miqësor. Vend perfekt për një mbrëmje romantike.",
+    text: "Faqja është e lehtë për t'u përdorur dhe customer support te jep zgjidhje te shpejtë nese do kesh probleme. Do ta përdor përsëri!",
   },
 ];
 

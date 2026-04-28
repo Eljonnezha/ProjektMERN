@@ -1,4 +1,3 @@
-import HomeImage from "../../image/HomeImage/homeimg.jpg";
 import ChooseUsImg from "../../image/HomeImage/chooseUSImg.jpg";
 import { Button, Container, Image, Row, Col } from "react-bootstrap";
 import datas from "../../projectInfo/customers.js";
@@ -17,8 +16,7 @@ function Home() {
 
   return (
     <div id="menu">
-      <div className="hero-container">
-        <Image src={HomeImage} alt="Home" className="imgcover" fluid />
+      <div className="hero-container imgcover">
         <div className="hero-text text-center px-3">
           <h1 className="fw-bold text-white fs-md-1 mb-3">
             Mirësevini në EatNow
@@ -26,16 +24,16 @@ function Home() {
           <p className="text-white fs-5 fs-md-5">
             Zbuloni shijen e veçantë të ushqimit tonë duke porositur tani,
             thjesht duke u regjistruar dhe loguar në llogarinë tuaj. Shijoni një
-            eksperiencë të shpejtë dhe të këndshme me ne!{" "}
+            eksperiencë të shpejtë dhe të këndshme me ne!
           </p>
           <Button variant="danger" size="lg" href="/menu">
-            View Menu
+            Shiko Menu
           </Button>
         </div>
       </div>
 
       <Container>
-        <h2 className="text-center my-5">Specialitetet Tona</h2>
+        <h2 className="text-center my-5">Më të Porositurat</h2>
         <Row className="g-4">
           {meals.slice(10, 13).map((meal, index) => (
             <Col xs={12} sm={6} md={4} key={index}>
@@ -50,7 +48,7 @@ function Home() {
                   <p className="flex-grow-1">{meal.description}</p>
                   <p className="fw-bold">{meal.price} €</p>
                   <Button variant="danger" className="mt-auto" href="/menu">
-                    View Menu
+                    Shiko Menu
                   </Button>
                 </div>
               </div>
@@ -77,17 +75,15 @@ function Home() {
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Përbërës të Freskët</h5>
                 <p>
-                  Ne përgatisim çdo pjatë duke përdorur prodhime lokale të
-                  freskëta.
+                  Partnerët tanë përdorin vetëm përbërës cilësorë dhe të
+                  freskët.
                 </p>
               </li>
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Shërbim Miqësor</h5>
-                <p>Ekipi ynë ju mirëpret me ngrohtësi dhe profesionalizëm.</p>
-              </li>
-              <li className="mb-3">
-                <h5 className="text-danger fw-bold">Ambjent i Rehatshëm</h5>
-                <p>Shijoni një atmosferë relaksuese perfekte për çdo rast.</p>
+                <p>
+                  Mbështetje online miqësore dhe profesionale për çdo klient.
+                </p>
               </li>
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Dërgesë e Shpejtë</h5>
@@ -99,8 +95,8 @@ function Home() {
               <li className="mb-3">
                 <h5 className="text-danger fw-bold">Shërbim i Shkëlqyer</h5>
                 <p>
-                  Ushqime të shijshme me çmime të arsyeshme — cilësi që mund të
-                  besoni.
+                  Eksperiencë moderne me cilësi të besueshme dhe çmime të
+                  arsyeshme.
                 </p>
               </li>
             </ul>

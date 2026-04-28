@@ -38,7 +38,7 @@ function Login({ closeModal }) {
       closeModal();
       
     } catch (err) {
-      setValid("Invalid email or password");
+      setValid("Email ose password i pavlefshëm");
     }
   };
   return (

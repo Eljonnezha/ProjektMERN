@@ -37,6 +37,9 @@ function Contact() {
           subject: "",
           message: "",
         });
+        setTimeout(() => {
+          setValid(null);
+        }, 3000);
       })
       
       .catch((err) => {
@@ -59,7 +62,7 @@ function Contact() {
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
           {valid !== null && (
             <Alert variant={valid ? "success" : "danger"}>
-              {valid ? "Message sent successfully!" : "Message failed to send!"}
+              {valid ? "Mesazhi u dergua me sukses!" : "Mesazhi nuk u dergua!"}
             </Alert>
           )}
           <Form onSubmit={handleSubmit} className="my-5 w-100 mx-auto">
@@ -115,17 +118,6 @@ function Contact() {
           <h5 className="mb-3 text-danger">Get In Touch</h5>
           <hr className="mb-3 border-start border-2 border-secondary shadow" />
           <div className="my-5 d-flex flex-column">
-            <a
-              href="https://maps.app.goo.gl/wnnrhMurzLMNH8RS6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="getintouch"
-            >
-              <i className="bi bi-geo-alt-fill pe-3 fs-5"></i>
-              <strong className="pe-2">Address:</strong> 123 Rruga Kryesore,
-              Tirane
-            </a>
-            <br />
             <a href="tel:+11234567890" className="getintouch">
               <i className="bi bi-telephone-fill pe-3 fs-5"></i>
               <strong className="pe-2">Phone:</strong> (123) 456-7890
@@ -157,15 +149,6 @@ function Contact() {
               className="getintouch"
             >
               <i className="bi bi-instagram p-2 fs-3"></i>
-            </a>
-            <br />
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="getintouch"
-            >
-              <i className="bi bi-twitter p-2 fs-3"></i>
             </a>
           </div>
         </Col>

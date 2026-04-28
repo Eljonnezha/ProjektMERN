@@ -4,7 +4,7 @@ function SecondNavBar() {
   return (
     <Navbar expand="lg" className="bg-white shadow-sm sticky-top py-3">
       <Container>
-        <Navbar.Brand href="/admin/dashboard/add-item" className="fw-bold fs-4 text-danger">
+        <Navbar.Brand href="/" className="fw-bold fs-4 text-danger">
           Admin Dashboard
         </Navbar.Brand>
 
@@ -29,6 +29,9 @@ function SecondNavBar() {
             </Nav.Link>
              <Nav.Link href="/admin/dashboard/users">
               Users
+            </Nav.Link>
+             <Nav.Link href="/admin/dashboard/reset-password/:id">
+              Reset User Password
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

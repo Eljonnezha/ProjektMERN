@@ -26,17 +26,17 @@ function Register({ closeModal }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateEmail(newUser.email)) {
-      setError("Please enter a valid email address");
+      setError("Ju lutem shkruani një adresë email të vlefshme");
       return;
     }
     try {
       await axios.post("http://localhost:5000/register", newUser);
       setError("");
-      setSuccess("Account registered successfully!");
+      setSuccess("Llogaria u regjistrua me sukses!");
       setTimeout(() => closeModal(), 2000);
     } catch (err) {
       // shfaq mesazhin nese user qe po krijon tashme ekziston ose nje mesazh gabimi qe rregjistrimi deshtoi
-      setError(err.response?.data || "Registration failed"); 
+      setError(err.response?.data || "Regjistrimi deshtoi"); 
       setSuccess("");
     }
   };

@@ -47,12 +47,12 @@ const UpdateItem = () => {
 
   return (
     <Container className="my-5">
-      <h1 className="text-center mb-4">Update Item</h1>
       <Form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
-        className="w-75 mx-auto"
+        className="w-50 mx-auto p-4 bg-light rounded shadow "
       >
+        <h1 className="text-center fs-2">Update Item</h1>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -94,12 +94,11 @@ const UpdateItem = () => {
           />
         </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" className="me-auto d-block">
           Update Item
         </Button>
-      </Form>
-
-      {uploadedImage ? (
+        
+        {uploadedImage ? (
         <Image
           src={uploadedImage}
           alt="Preview"
@@ -111,9 +110,11 @@ const UpdateItem = () => {
           src={`http://localhost:5000/images/${updateItem.photo}`}
           alt="Existing"
           rounded
-          className="img-fluid mt-3"
+          width={300}
+          className="img-fluid my-5"
         />
       ) : null}
+      </Form>
     </Container>
   );
 };

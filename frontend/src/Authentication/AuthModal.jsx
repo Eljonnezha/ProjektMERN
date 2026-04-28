@@ -8,7 +8,6 @@ function AuthModal({ show, handleClose }) {
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      
       {/* header */}
       <Modal.Header closeButton className="border-0 bg-light">
         <Modal.Title className="w-100 text-center">
@@ -18,7 +17,6 @@ function AuthModal({ show, handleClose }) {
 
       {/* body */}
       <Modal.Body className="px-4 py-3 bg-light">
-
         {/* kontenti ku shfaqet login ose register */}
         {mode === "login" ? (
           <Login closeModal={handleClose} />
@@ -29,18 +27,30 @@ function AuthModal({ show, handleClose }) {
         {/* butonat ku mund te kalohet nga login ne register dhe anasjelltas */}
         <div className="text-center mt-3 ">
           {mode === "login" ? (
-            <span
-              onClick={() => setMode("register")}
-            >
-              Don't have an account? <Button className="ms-2" onClick={() => setMode("register")}>Register</Button>
+            <span onClick={() => setMode("register")}>
+              Nuk keni një llogari?
+              <Button className="ms-2" onClick={() => setMode("register")}>
+                Regjistrohu
+              </Button>
             </span>
           ) : (
             <span>
-              Already have an account?<Button className="ms-2" onClick={() => setMode("login")}>Login</Button>
+              E keni tashme nje llogari?
+              <Button className="ms-2" onClick={() => setMode("login")}>
+                Login
+              </Button>
             </span>
           )}
+          <span className="d-block mt-2 w-100 text-muted">
+            Nëse keni harruar fjalëkalimin, ju lutem na kontaktoni në formularin e kontaktit në
+            <a
+              href="/contact"
+              className="ms-2 text-decoration-none text-primary"
+            >
+              Contact Us
+            </a>
+          </span>
         </div>
-
       </Modal.Body>
     </Modal>
   );

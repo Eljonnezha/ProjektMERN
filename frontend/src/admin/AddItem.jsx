@@ -33,12 +33,12 @@ function AddItem() {
 
   return (
     <Container xs={12} className="my-5">
-      <h1 className="text-center mb-4">Create Item</h1>
       <Form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
-        className="w-75 mx-auto"
+        className="w-50 mx-auto p-4 bg-light rounded shadow"
       >
+        <h1 className="text-center fs-2 mb-4">Create Item</h1>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control

@@ -13,7 +13,7 @@ app.post("/register", async (req, res) => {
     const userInfo = req.body;
     const findUser = await userModel.findOne({ email: userInfo.email });
     if (findUser) {
-      return res.status(400).send("User exist");
+      return res.status(400).send("Ky user ekziston tashme");
     } else {
       const newUser = new userModel({
         ...req.body,
@@ -44,6 +44,8 @@ app.post("/login", async (req, res) => {
             id: findUser._id,
             username: findUser.username,
             email: findUser.email,
+            // Shtimi i rolit te userit ne token
+            role: findUser.role,
           },
           process.env.TOKEN_SECRET,
         );
@@ -56,6 +58,8 @@ app.post("/login", async (req, res) => {
             id: findUser._id,
             username: findUser.username,
             email: findUser.email,
+            //  Shtimi i rolit te userit ne json
+            role: findUser.role,
           });
       } else {
         res.status(400).send("user not found");
@@ -98,12 +102,30 @@ app.delete("/user/:id", async (req, res) => {
 // get all users
 app.get("/users", async (req, res) => {
   try {
-    const users = await userModel.find();
-    res.status(200).send(users);
-    console.log("Users fetched");
+    const allUsers = await userModel.find();
+    res.status(200).send(allUsers);
+    console.log(allUsers);
   } catch (err) {
-    res.status(500).send("Error fetching users:" + err);
-    console.log("Error fetching users:" + err);
+    res.status(500).send("Error getting users:" + err);
+    console.log("Error getting users:" + err);
+  }
+});
+
+// reset psw
+app.put("/reset-password/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { password } = req.body;
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    await userModel.findByIdAndUpdate(id, {
+      password: hashedPassword,
+    });
+
+    res.status(200).send("Password updated");
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 

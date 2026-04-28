@@ -12,17 +12,16 @@ function CartModal({
   // llogarisim totalin e porosise
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton className="bg-danger text-white">
-        <Modal.Title>Your Cart</Modal.Title>
+        <Modal.Title>Shporta Juaj</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="d-flex flex-column gap-3 bg-light">
         {cart.length === 0 ? (
-          <p>No items</p>
+          <p>Asnjë artikull në shport</p>
         ) : (
           cart.map((item, index) => (
             <div
@@ -64,7 +63,7 @@ function CartModal({
         )}
 
         <hr />
-        <h5 >Total: {total} €</h5>
+        <h5 >Totali: {total} €</h5>
       </Modal.Body>
 
       <Modal.Footer className="bg-light border-0">
@@ -72,9 +71,11 @@ function CartModal({
           Close
         </Button>
 
-        <Button variant="primary" onClick={openCheckout}>
-          Checkout
-        </Button>
+        {cart.length > 0 && (
+          <Button variant="primary" onClick={openCheckout}>
+            Checkout
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );
