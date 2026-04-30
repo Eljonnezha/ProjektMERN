@@ -10,10 +10,8 @@ import AdminDashboard from "./admin/AdminDashboard.jsx";
 import CartModal from "./components/pages/Cart/CartModal.jsx";
 import { useState, useEffect, useContext } from "react";
 import CheckoutForm from "./components/pages/Cart/CheckoutForm.jsx";
-import {
-  UserContextProvider,
-  UserContext,
-} from "./Authentication/UserContext.jsx";
+import { UserContextProvider, UserContext} from "./Authentication/UserContext.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 // Pjesa e mbrojtjes se Admin
 function AdminProtectedRoute() {
@@ -33,95 +31,116 @@ function AdminProtectedRoute() {
 function App() {
   const location = useLocation();
 
-  const [cart, setCart] = useState(() => {
-    const storedCart = localStorage.getItem("cart");
-    return storedCart ? JSON.parse(storedCart) : [];
+  const [shport, setShport] = useState(() => {
+    const storedShport = localStorage.getItem("shport");
+    return storedShport ? JSON.parse(storedShport) : [];
   });
-  const [showCart, setShowCart] = useState(false);
+  const [showShport, setShowShport] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
 
-  // shto ne kart
-  const addToCart = (meal) => {
-    setCart((prev) => {
+  // shto ne shport
+  const addToShport = (meal) => {
+    setShport((prev) => {
       const existing = prev.find((item) => item.name === meal.name);
 
       if (existing) {
-        return prev.map((item) =>
-          item.name === meal.name
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
+        return prev.map((item) => {
+          if (item.name === meal.name) {
+            return { ...item, quantity: item.quantity + 1 };
+          } else {
+            return item;
+          }
+        });
       }
 
       return [...prev, { ...meal, quantity: 1 }];
     });
   };
-  // rrit sasin ne kart
-  const increaseQuantity = (id) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.name === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
+  // rrit sasin ne shport
+  const rritSasin = (id) => {
+    setShport((prev) =>
+      prev.map((item) => {
+        if (item.name === id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item; 
+        }
+      }),
     );
   };
-  // zvogelon sasin ne kart
-  const decreaseQuantity = (id) => {
-    setCart((prev) =>
-      prev
-        .map((item) =>
-          item.name === id ? { ...item, quantity: item.quantity - 1 } : item,
-        )
+  // zvogelon sasin ne shport
+  const zvogelonSasin = (id) => {
+    setShport((prev) =>
+      prev.map((item) => {
+          if (item.name === id) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return item;
+          }
+        })
         .filter((item) => item.quantity > 0),
     );
   };
-  // heq item nga karta
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.name !== id));
+  // heq item nga shporta
+  const removeFromShport = (id) => {
+    setShport((prev) => prev.filter((item) => item.name !== id));
   };
-  //pastron karten pas checkout
-  const clearCart = () => {
-    setCart([]);
+  //pastron shporten pas checkout
+  const clearShport = () => {
+    setShport([]);
   };
-  // ruan kart ne localStorage per te mbajtur gjendjen edhe pas rifreskimit te faqes
+  // ruan shporten ne localStorage per te mbajtur gjendjen edhe pas rifreskimit te faqes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem("shport", JSON.stringify(shport));
+  }, [shport]);
 
   return (
     <UserContextProvider>
-      {!location.pathname.startsWith("/admin/dashboard") && (
-        <Navigationbar cart={cart} openCart={() => setShowCart(true)} />
-      )}
+      {!location.pathname.startsWith("/admin/dashboard") &&
+        !location.pathname.startsWith("/notfound") && (
+          <Navigationbar
+            shport={shport}
+            openShport={() => setShowShport(true)}
+          />
+        )}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu addToCart={addToCart} />} />
+        <Route
+          path="/menu"
+          element={<Menu addToShport={addToShport} clearShport={clearShport} />}
+        />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* Permiresimi i route */}
         <Route path="/admin/dashboard/*" element={<AdminProtectedRoute />} />
-        <Route path="*" element={<h1>Page Not Found</h1>} />
+        <Route path="/notfound" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/notfound" />} />
       </Routes>
       <CartModal
-        show={showCart}
-        handleClose={() => setShowCart(false)}
-        cart={cart}
-        increaseQuantity={increaseQuantity}
-        decreaseQuantity={decreaseQuantity}
-        removeFromCart={removeFromCart}
-        setShowCart={setShowCart}
+        show={showShport}
+        handleClose={() => setShowShport(false)}
+        shport={shport}
+        rritSasin={rritSasin}
+        zvogelonSasin={zvogelonSasin}
+        removeFromShport={removeFromShport}
+        setShowShport={setShowShport}
         openCheckout={() => {
           setShowCheckout(true);
-          setShowCart(false);
+          setShowShport(false);
         }}
       />
       <CheckoutForm
         show={showCheckout}
         handleClose={() => setShowCheckout(false)}
-        total={cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}
-        cart={cart}
-        clearCart={clearCart}
+        total={shport.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        )}
+        shport={shport}
+        clearShport={clearShport}
       />
-      {!location.pathname.startsWith("/admin/dashboard") && <Footer />}
+      {!location.pathname.startsWith("/admin/dashboard") &&
+        !location.pathname.startsWith("/notfound") && <Footer />}
     </UserContextProvider>
   );
 }

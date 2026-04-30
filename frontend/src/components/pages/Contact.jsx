@@ -123,7 +123,8 @@ function Contact() {
               <strong className="pe-2">Phone:</strong> (123) 456-7890
             </a>
             <br />
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@restaurant.com" className="getintouch">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@restaurant.com"  target="_blank"
+              rel="noopener noreferrer" className="getintouch">
               <i className="bi bi-envelope-fill pe-3 fs-5"></i>
               <strong className="pe-2">Email:</strong>
               info@restaurant.com

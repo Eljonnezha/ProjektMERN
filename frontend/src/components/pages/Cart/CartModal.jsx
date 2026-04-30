@@ -3,14 +3,14 @@ import { Modal, Button } from "react-bootstrap";
 function CartModal({
   show,
   handleClose,
-  cart,
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
+  shport,
+  rritSasin,
+  zvogelonSasin,
+  removeFromShport,
   openCheckout,
 }) {
   // llogarisim totalin e porosise
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = shport.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
 
   return (
@@ -20,10 +20,10 @@ function CartModal({
       </Modal.Header>
 
       <Modal.Body className="d-flex flex-column gap-3 bg-light">
-        {cart.length === 0 ? (
+        {shport.length === 0 ? (
           <p>Asnjë artikull në shport</p>
         ) : (
-          cart.map((item, index) => (
+          shport.map((item, index) => (
             <div
               key={index}
               className="d-flex justify-content-between align-items-center px-2 py-2 "
@@ -36,7 +36,7 @@ function CartModal({
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={() => decreaseQuantity(item.name)}
+                  onClick={() => zvogelonSasin(item.name)}
                 >
                   -
                 </Button>
@@ -46,14 +46,14 @@ function CartModal({
                 <Button
                   size="sm"
                   variant="secondary"
-                  onClick={() => increaseQuantity(item.name)}
+                  onClick={() => rritSasin(item.name)}
                 >
                   +
                 </Button>
                 <Button
                   size="sm"
                   variant="danger"
-                  onClick={() => removeFromCart(item.name)}
+                  onClick={() => removeFromShport(item.name)}
                 >
                   Remove
                 </Button>
@@ -71,7 +71,7 @@ function CartModal({
           Close
         </Button>
 
-        {cart.length > 0 && (
+        {shport.length > 0 && (
           <Button variant="primary" onClick={openCheckout}>
             Checkout
           </Button>

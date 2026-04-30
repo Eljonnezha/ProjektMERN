@@ -26,7 +26,7 @@ function Orders() {
     await axios
       .put("http://localhost:5000/updateOrderStatus/" + id)
       .then((res) =>
-        setOrders(orders.map((order) => (order._id === id ? res.data : order))),
+        setOrders(orders.map((order) => (order._id === id ? res.data : order))), 
       )
       .catch((err) => console.log("Error updating order status:" + err));
   };
@@ -52,49 +52,51 @@ function Orders() {
           </tr>
         </thead>
         <tbody>
-          {orders.map((order, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{order.fullName}</td>
-              <td>{order.email}</td>
-              <td>{order.address}</td>
-              <td>{order.phoneNumber}</td>
-              <td>{order.city}</td>
-              <td>{order.totalAmount} €</td>
-              <td>{order.paymentMethod}</td>
-              <td>
-                <ul>
-                  {order.items.map((item, i) => (
-                    <li key={i}>
-                      {item.name} x {item.quantity} 
-                    </li>
-                  ))}
-                </ul>
-              </td>
-              <td>{new Date(order.orderDate).toLocaleString()}</td>
-              <td>{order.status}</td>
-              <td>
-                <Row className="d-flex flex-column g-2">
-                  <Col>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDelete(order._id)}
-                    >
-                      Delete
-                    </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      variant="success"
-                      onClick={() => updateStatus(order._id)}
-                    >
-                      Complete
-                    </Button>
-                  </Col>
-                </Row>
-              </td>
-            </tr>
-          ))}
+          {orders.map((order, index) => {
+            return (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{order.fullName}</td>
+                <td>{order.email}</td>
+                <td>{order.address}</td>
+                <td>{order.phoneNumber}</td>
+                <td>{order.city}</td>
+                <td>{order.totalAmount} €</td>
+                <td>{order.paymentMethod}</td>
+                <td>
+                  <ul>
+                    {order.items.map((item, i) => (
+                      <li key={i}>
+                        {item.name} x {item.quantity}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+                <td>{new Date(order.orderDate).toLocaleString()}</td>
+                <td>{order.status}</td>
+                <td>
+                  <Row className="d-flex flex-column g-2">
+                    <Col>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(order._id)}
+                      >
+                        Delete
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        variant="success"
+                        onClick={() => updateStatus(order._id)}
+                      >
+                        Complete
+                      </Button>
+                    </Col>
+                  </Row>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

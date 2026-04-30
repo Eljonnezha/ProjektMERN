@@ -7,14 +7,15 @@ require("dotenv").config();
 const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 app.post("/create-checkout-session", async (req, res) => {
-  const { cart, customer } = req.body; 
+  const { shport } = req.body;
 
   try {
+    // krijojme sesionin e pageses ne Stripe me te dhenat e shportes 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
 
-      line_items: cart.map((item) => ({
+      line_items: shport.map((item) => ({
         price_data: {
           currency: "eur",
           product_data: {
@@ -29,7 +30,8 @@ app.post("/create-checkout-session", async (req, res) => {
       cancel_url: "http://localhost:3000/menu?payment=cancel",
     });
 
-    res.json({ url: session.url, customer });
+    // Kthen tek frontend URL-në e sesionit Stripe Checkout per te drejtuar perdoruesin ne faqen e pageses
+    res.json({ url: session.url });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err.message });

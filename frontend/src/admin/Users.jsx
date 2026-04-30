@@ -1,11 +1,8 @@
 import { Container, Table } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function Users() {
-  const nav = useNavigate();
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -25,10 +22,6 @@ function Users() {
       .catch((err) => console.log("Error deleting user:" + err));
   };
 
-  const handleResetPassword = async (id) => {
-    nav("/admin/dashboard/reset-password/" + id);
-  };
-
   return (
     <Container className="my-5">
       <h1 className="mb-4 text-center">Users</h1>
@@ -43,28 +36,24 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.password}</td>
-              <td>{user.role}</td>
-              <td className="d-flex justify-content-center gap-2">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(user._id)}
-                >
-                  Delete
-                </button>
-                <button
-                  className="btn btn-warning"
-                  onClick={() => handleResetPassword(user._id)}
-                >
-                  Reset Password
-                </button>
-              </td>
-            </tr>
-          ))}
+          {users.map((user) => {
+            return (
+              <tr key={user._id}>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>{user.role}</td>
+                <td className="d-flex justify-content-center gap-2">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(user._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

@@ -103,8 +103,8 @@ function About() {
 
               <h5 className="fw-bold text-danger my-3">Menaxhimi & Organizimi</h5>
               <p className="mx-auto w-75">
-                Ekipi i menaxhimit kujdeset që çdo proces — nga porosia deri te
-                dërgesa — të jetë i qartë dhe i organizuar.
+                Ekipi i menaxhimit kujdeset që çdo proces nga porosia deri te
+                dërgesa, të jetë i qartë dhe i organizuar.
               </p>
             </div>
           </Col>

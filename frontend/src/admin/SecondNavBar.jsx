@@ -30,9 +30,6 @@ function SecondNavBar() {
              <Nav.Link href="/admin/dashboard/users">
               Users
             </Nav.Link>
-             <Nav.Link href="/admin/dashboard/reset-password/:id">
-              Reset User Password
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -32,11 +32,12 @@ const UpdateItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // kemi krijuar nje FormData per te derguar te dhenat e itemit duke perfshire dhe foton nese eshte ndryshuar
     const formData = new FormData();
     Object.entries(updateItem).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
+    
     await axios
       .patch("http://localhost:5000/update-menu/" + id, formData)
       .then((res) => nav("/admin/dashboard/admin-menu"))

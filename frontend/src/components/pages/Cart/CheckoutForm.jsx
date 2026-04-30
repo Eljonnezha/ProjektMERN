@@ -2,7 +2,7 @@ import { Modal, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 
-function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
+function CheckoutForm({ show, handleClose, total, shport, clearShport }) {
   const [orders, setOrders] = useState({
     fullName: "",
     email: "",
@@ -12,7 +12,7 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
     paymentMethod: "",
   });
 
-  const [valid, setValid] = useState(null);
+  const [valid, setValid] = useState("");
 
   const handleChange = (e) => {
     setOrders({ ...orders, [e.target.name]: e.target.value });
@@ -30,19 +30,20 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
       !orders.city ||
       !orders.paymentMethod
     ) {
-      setValid(false);
+      setValid("Potesoni te gjitha fushat!");
       setTimeout(() => {
-        setValid(null);
+        setValid("");
       }, 3000);
       return;
     }
 
-    // kontrollojme nese metoda e pageses eshte bere me cash dhe nese po vazhdojme me kete menyre pagese
+
     if (orders.paymentMethod === "Cash") {
-      const orderData = {
+      
+      const orderData = { 
         ...orders,
         totalAmount: total,
-        items: cart.map((item) => ({
+        items: shport.map((item) => ({
           name: item.name,
           price: item.price,
           quantity: item.quantity,
@@ -52,31 +53,29 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
       try {
         await axios.post("http://localhost:5000/addOrder", orderData);
 
-        setValid(true);
-        clearCart();
+        setValid("Porosia u krye me sukses!");
+        clearShport();
 
         setTimeout(() => {
-          setValid(null);
+          setValid("");
           handleClose();
         }, 1500);
       } catch (err) {
         console.log(err);
-        setValid(false); 
-        setTimeout(() => {
-          setValid(null);
-        }, 3000);
+        setValid("Ndodhi një gabim gjatë përpunimit të porosisë."); 
       }
     }
 
-    // kontrollojme nese metoda e pageses eshte bere me card dhe nese po vazhdojme me kete menyre pagese
     if (orders.paymentMethod === "Card") {
       try {
+        // ruajme te dhenat e porosise ne localStorage per ti perdorur ne faqen e pageses
         localStorage.setItem("checkoutData", JSON.stringify(orders));
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("shport", JSON.stringify(shport)); 
 
+        
         const res = await axios.post(
           "http://localhost:5000/api/payment/create-checkout-session",
-          { cart }
+          { shport }
         ); 
 
         window.location.href = res.data.url;
@@ -97,9 +96,9 @@ function CheckoutForm({ show, handleClose, total, cart, clearCart }) {
 
       <Modal.Body className="bg-light d-flex flex-column gap-3">
         <Form>
-          {valid !== null && (
-            <Alert variant={valid ? "success" : "danger"}>
-              {valid ? "Porosia u krye me sukses!" : "Plotëso të gjitha fushat!"}
+          {valid && (
+            <Alert variant={valid === "Porosia u krye me sukses!" ? "success" : "danger"}>
+              {valid}
             </Alert>
           )}
 

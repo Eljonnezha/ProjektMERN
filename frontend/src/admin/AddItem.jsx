@@ -22,10 +22,12 @@ function AddItem() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // kemi krijuar nje FormData per te derguar te dhenat e itemit duke perfshire dhe foton
     const formData = new FormData();
     Object.keys(newItem).forEach((key) => {
       formData.append(key, newItem[key]);
     });
+    
     await axios.post("http://localhost:5000/add-menu", formData)
       .then((res) => navigate("/admin/dashboard/admin-menu"))
       .catch((err) => console.log(err));

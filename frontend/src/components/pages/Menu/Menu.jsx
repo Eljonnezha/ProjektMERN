@@ -1,10 +1,12 @@
 import { Col, Container, Row, Modal, Button } from "react-bootstrap";
 import MenuProps from "./MenuProps";
 import { useState, useEffect } from "react";
+import { useRef } from "react";
 import axios from "axios";
 
-function Menu({ addToCart }) {
+function Menu({ addToShport, clearShport }) {
   const [meals, setMeals] = useState([]);
+  const orderSaved = useRef(false);
 
   useEffect(() => {
     axios
@@ -13,23 +15,26 @@ function Menu({ addToCart }) {
       .catch((err) => console.log(err));
   }, []);
 
-  // nese pagesa ishte e sukseshme shfaqim modalin e suksesit 
-  const [showSuccessModal, setShowSuccessModal] = useState(false); 
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Do kontrollojm nese pagesa ka qen e suksesshme dhe ruan porosin ne databaz
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search); 
+ useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
     const payment = params.get("payment");
 
-    if (payment === "success") {
-      setShowSuccessModal(true);
+    if (payment === "success" && !orderSaved.current) { 
+      orderSaved.current = true;
 
+      setShowSuccessModal(true);
+     // funksioni per te ruajtur porosine ne databaz
       const saveOrder = async () => {
-        const cart = JSON.parse(localStorage.getItem("cart")); 
+        // marrim te dhenat e porosise dhe shporten nga localStorage
+        const cart = JSON.parse(localStorage.getItem("shport")); 
         const data = JSON.parse(localStorage.getItem("checkoutData")); 
 
-        if (!cart || !data) return;
+        if (!cart || !data) return; 
 
+        // krijojme objektin e porosise per tu ruajtur ne db
         const orderData = {
           ...data,
           paymentMethod: "Card",
@@ -43,10 +48,11 @@ function Menu({ addToCart }) {
         try {
           await axios.post("http://localhost:5000/addOrder", orderData);
 
-          console.log("Order saved to MongoDB");
+          console.log("Order u ruajt ne MongoDB");
 
-          localStorage.removeItem("cart");
+          clearShport();
           localStorage.removeItem("checkoutData");
+          localStorage.removeItem("shport");
         } catch (err) {
           console.log(err);
         }
@@ -57,7 +63,7 @@ function Menu({ addToCart }) {
 
       saveOrder();
     }
-  }, []);
+  }, [clearShport]);
 
   return (
     <Container>
@@ -65,12 +71,12 @@ function Menu({ addToCart }) {
 
       <Modal
         show={showSuccessModal}
-        onHide={() => setShowSuccessModal(false)} 
+        onHide={() => setShowSuccessModal(false)}
         centered
       >
         <Modal.Body className="text-center my-4 ">
-          <h4 className="text-success">Payment completed successfully!</h4>
-          <p className="text-success">Your order has been received.</p>
+          <h4 className="text-success">Pagesa u krye me sukses!</h4>
+          <p className="text-success">Porosia juaj është pranuar.</p>
         </Modal.Body>
 
         <Modal.Footer className="border-0">
@@ -84,7 +90,7 @@ function Menu({ addToCart }) {
         {meals.map((meal) => {
           return (
             <Col key={meal._id} xs={12} sm={6} md={4} lg={3}>
-              <MenuProps {...meal} addToCart={addToCart} />
+              <MenuProps {...meal} addToShport={addToShport} />
             </Col>
           );
         })}

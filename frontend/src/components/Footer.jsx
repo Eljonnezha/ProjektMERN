@@ -7,7 +7,8 @@ function Footer() {
         <Row className="g-4 text-center text-md-start">
           <Col xs={12} md={4}>
             <h5 className="mb-3">Contact Us</h5>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@eatnow.com">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@eatnow.com" target="_blank"
+              rel="noopener noreferrer">
               Email: info@eatnow.com
             </a>
             <br />

@@ -112,23 +112,29 @@ app.get("/users", async (req, res) => {
 });
 
 // reset psw
-app.put("/reset-password/:id", async (req, res) => {
+app.put("/reset-password", async (req, res) => {
   try {
-    const { id } = req.params;
-    const { password } = req.body;
+    const { email, password } = req.body;
 
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    
+    // bejme hash psw te ri 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    await userModel.findByIdAndUpdate(id, {
-      password: hashedPassword,
-    });
+    // ruajme psw e ri ns db
+    user.password = hashedPassword;
+    await user.save();
 
     res.status(200).send("Password updated");
   } catch (err) {
     res.status(500).send(err);
+    console.log(err)
   }
 });
-
 // logout
 app.post("/logout", async (req, res) => {
   res

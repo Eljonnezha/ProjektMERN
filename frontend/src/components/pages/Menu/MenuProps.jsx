@@ -2,7 +2,7 @@ import { Image, Button, Alert } from "react-bootstrap";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../Authentication/UserContext.jsx";
 
-function MenuProps({ photo, name, description, price, addToCart }) {
+function MenuProps({ photo, name, description, price, addToShport }) {
   // marrim info nese useri nese eshte i loguar ose jo nga UserContext
   const { userInfo } = useContext(UserContext);
   // shfaqim alert nese useri nuk eshte i loguar dhe tenton te shtoje ne cart pa u loguar
@@ -13,7 +13,7 @@ function MenuProps({ photo, name, description, price, addToCart }) {
   if (showAlert) {
     const timer = setTimeout(() => {
       setShowAlert(false);
-    }, 4000);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }
@@ -32,20 +32,20 @@ function MenuProps({ photo, name, description, price, addToCart }) {
         <Button
           variant="danger"
           className="mt-auto mb-2"
-          // kontrollojme nese useri eshte i loguar, nese jo shfaqim alert dhe item nuk shtohen ne cart, nese po item shtohen ne cart
+          // kontrollojme nese useri eshte i loguar, nese jo shfaqim alert dhe item nuk shtohen ne shport, nese po item shtohen ne shport
           onClick={() => {
             if (!userInfo.email) {
               setShowAlert(true);
               return;
             }
-            addToCart({ name, price });
+            addToShport({ name, price });
           }}
         >
           Shto në <i className="bi bi-cart ms-2"></i>
         </Button>
         {showAlert && (
           <Alert variant="warning" onClose={() => setShowAlert(false)} dismissible>
-            Ju lutem logohuni për të shtuar artikuj në cart.
+            Ju lutem rregjistrohuni ose logohuni nese keni nje llogari për të shtuar artikuj në shport.
           </Alert>
         )}
       </div>

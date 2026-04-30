@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import AuthModal from "../Authentication/AuthModal.jsx";
 
-function Navigationbar({ cart, openCart }) {
+function Navigationbar({ shport, openShport }) {
   // llogarisim totalin e sasis se itemeve ne cart
-  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalQuantity = shport.reduce((acc, item) => acc + item.quantity, 0);
 
   const nav = useNavigate();
 
@@ -28,7 +28,7 @@ function Navigationbar({ cart, openCart }) {
 
     userData();
   }, [userInfo, setUserInfo]);
-
+  
   const handleLogout = async () => {
     await axios
       .post("http://localhost:5000/logout/", null, { withCredentials: true })
@@ -39,7 +39,7 @@ function Navigationbar({ cart, openCart }) {
       .catch((err) => console.log("Not logout"));
   };
 
-  // shfaqim modalin per login dhe register kur useri klikon butonin register/login
+  // shfaqim modalin per login register dhe reset psw kur useri klikon butonin register/login
   const [showAuth, setShowAuth] = useState(false);
 
   return (
@@ -77,7 +77,7 @@ function Navigationbar({ cart, openCart }) {
               <Button
                 variant="danger"
                 className="px-4 rounded-pill me-5"
-                onClick={openCart}
+                onClick={openShport}
               >
                 <i className="bi bi-cart ms-2"></i> ({totalQuantity}) 
               </Button>

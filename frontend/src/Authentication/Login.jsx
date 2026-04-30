@@ -11,7 +11,7 @@ function Login({ closeModal }) {
     password: "",
   });
 
-  const [valid, setValid] = useState("");
+  const [error, setError] = useState(""); 
 
   const handleChange = (e) => {
     setUserLog({
@@ -27,23 +27,23 @@ function Login({ closeModal }) {
       await axios.post("http://localhost:5000/login/", userLog, {
         withCredentials: true,
       });
-
+      
       const res = await axios.get("http://localhost:5000/user/", {
         withCredentials: true,
       });
 
       setUserInfo(res.data);
 
-      setValid(""); // pastron çdo mesazh gabimi nese kishte me pare
+      setError("");
       closeModal();
       
     } catch (err) {
-      setValid("Email ose password i pavlefshëm");
+      setError("Email ose password i pavlefshëm");
     }
   };
   return (
     <Form onSubmit={handleSubmit} className="px-3">
-      {valid && <Alert variant="danger">{valid}</Alert>}
+      {error && <Alert variant="danger">{error}</Alert>}
       <Form.Control
         name="email"
         placeholder="Email"
